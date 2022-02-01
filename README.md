@@ -13,10 +13,10 @@ tampered with or modified externally.
 
 ### Contributers
 
-Anastasiya Bogoslovskaya
-Steven Cataluna 
-Charles Christiansson
-Mohamed Difallah
-Alice Doherty 
-Conor Doherty
-Alexander Sepelenco 
+Anastasiya Bogoslovskaya,  
+Steven Cataluna,     
+Charles Christiansson,  
+Mohamed Difallah,    
+Alice Doherty,       
+Conor Doherty,    
+Alexander Sepelenco  
