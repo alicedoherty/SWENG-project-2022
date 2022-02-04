@@ -2,7 +2,7 @@
 
 Propylon - Blockchain publishing system
 
-## Description
+## Project Description
 
 Build a web-based application for authoring and publishing content, with published versions being persisted 
 on the blockchain for auditability and verification. Users of the system should be able to see the current 
@@ -11,7 +11,15 @@ in the blockchain, and also view previous versions published to the blockchain. 
 a verifiable audit trail for all versions of a piece of content, so consumers can be sure it hasn’t been 
 tampered with or modified externally.
 
-### Contributers
+## Useful Information
+
+Client: Greg Chapple  
+Email: greg.chapple@propylon.com  
+ 
+Demonstrator: Dennis McNulty  
+Email: DEMCNULT@tcd.ie 
+
+## Contributers
 
 Anastasiya Bogoslovskaya,  
 Steven Cataluna,     
