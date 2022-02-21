@@ -27,4 +27,44 @@ Charles Christiansson,
 Mohamed Difallah,    
 Alice Doherty,       
 Conor Doherty,    
-Alexander Sepelenco  
+Alexander Sepelenco
+
+## Dependencies
+- [Node.js](https://nodejs.org/en/)
+- [Truffle Suite](https://trufflesuite.com/)
+    - Install with `npm install -g truffle`
+- [Ganache](https://trufflesuite.com/ganache/index.html) (scroll to the bottom for working download link)
+- [MetaMask](https://metamask.io/download/)
+
+## Running the App
+Boilerplate template used: https://github.com/truffle-box/react-box
+
+1. Install dependencies listed above
+
+2. Open Ganache and select "Quickstart"
+
+3. Start development console with 
+
+```
+truffle develop
+```
+
+4. Compile and migrate smart contracts
+
+```
+compile
+migrate --reset
+```
+
+5. To run React app
+
+```
+cd client
+npm run start
+```
+
+6. On MetaMask connect to Ganache network 
+    - Create new network with RPC URL "HTTP://127.0.0.1:7545" and Chain ID "1337"
+    - "Import account" using private key of first account on Ganache
+
+
