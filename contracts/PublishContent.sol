@@ -17,23 +17,24 @@ contract PublishContent {
         nextId++;
     }
 
+    // change text e.g. blogpost (modify text)
     function publish(uint id, string memory _text) public {
-        if (binarySearch(id, 0, users.length-1) && !strcmp(id)) users[id].text = _text; 
+        if (binarySearch(id, 0, users.length-1) && !isStrEmpty(id)) users[id].text = _text; 
         else userError();
     }
 
     function read(uint id) view public returns(uint, string memory, string memory) {
-        if (binarySearch(id, 0, users.length-1) && !strcmp(id)) return(users[id].id, users[id].name, users[id].text);
+        if (binarySearch(id, 0, users.length-1) && !isStrEmpty(id)) return(users[id].id, users[id].name, users[id].text);
         userError();
     }
 
     function update(uint id, string memory text) public {
-        if (binarySearch(id, 0, users.length-1) && !strcmp(id)) users[id].text = text;
+        if (binarySearch(id, 0, users.length-1) && !isStrEmpty(id)) users[id].text = text;
         else userError();
     }
 
     function del(uint id) public { // will delete the id number and e.g. there will never be id 0 again if id 0 is deleted
-        if (binarySearch(id, 0, users.length-1) && !strcmp(id)) delete users[id];
+        if (binarySearch(id, 0, users.length-1)) delete users[id];
         else userError();
     }
 
@@ -47,7 +48,7 @@ contract PublishContent {
         else return binarySearch(id, mid+1, end);
     }
 
-    function strcmp(uint id) view internal returns(bool) {
+    function isStrEmpty(uint id) view internal returns(bool) {
         return keccak256(abi.encodePacked(users[id].name)) == keccak256(abi.encodePacked(""));
     }
 
