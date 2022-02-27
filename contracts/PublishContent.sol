@@ -18,7 +18,7 @@ contract PublishContent {
 
     // change text e.g. blogpost (modify text)
     // if user does not exist, it will give userError() but cause error, needs fixing
-    function publish(uint _id, string memory _text) public {
+    function publish(uint _id, string memory _text) public mustBeUser(_id) {
         users[_id-1].text = _text;
     }
 
