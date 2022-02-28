@@ -41,6 +41,8 @@ Boilerplate template used: https://github.com/truffle-box/react-box
 
 1. Install dependencies listed above
 
+2. Run `npm install` (both within the main `SWENG-project-22` folder and in `client`) to install dependencies
+
 2. Open Ganache and select "Quickstart"
 
 3. Start development console with 
@@ -67,4 +69,5 @@ npm run start
     - Create new network with RPC URL "HTTP://127.0.0.1:7545" and Chain ID "1337"
     - "Import account" using private key of first account on Ganache
 
+7. `localhost:3000` will render the React code, to test the React Truffle Box boiler plate code (w/ MetaMask, transactions, etc.) click the test button
 
