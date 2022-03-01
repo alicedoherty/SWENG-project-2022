@@ -22,9 +22,14 @@ contract PublishContent {
         users[_id-1].text = _text;
     }
 
-    function read(uint _id) view public returns(uint, string memory, string memory) {
+    function readName(uint _id) view public returns(string memory) {
         require(_id != 0, "User does not exist"); // instead of require, so there aren't warnings
-        if (searchUser(_id)) return(users[_id-1].id, users[_id-1].name, users[_id-1].text); // _id - 1 is actually necessary...
+        if (searchUser(_id)) return(users[_id-1].name); // _id - 1 is actually necessary...
+        userError();
+    }
+    function readtext(uint _id) view public returns(string memory) {
+        require(_id != 0, "User does not exist"); // instead of require, so there aren't warnings
+        if (searchUser(_id)) return(users[_id-1].text); // _id - 1 is actually necessary...
         userError();
     }
     // be very careful when deleting users, because even with mustBeUser, it will cost money, just how solidity works
