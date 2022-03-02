@@ -6,7 +6,7 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = { storageValue: 0, web3: null, accounts: null, contract: null, authorName: null, blogText: null };
 
   componentDidMount = async () => {
     try {
@@ -50,13 +50,14 @@ class App extends Component {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
-    await contract.methods.create("Alice", "this is my blog post").send({ from: accounts[0] });
+    await contract.methods.create("John Doe", "Hello World!").send({ from: accounts[0] });
 
     // Get the value from the contract to prove it worked.
-    const response = await contract.methods.readName(1).call();
+    const name = await contract.methods.readName(1).call();
+    const text = await contract.methods.readText(1).call();
 
     // Update state with the result.
-    this.setState({ storageValue: response });
+    this.setState({ authorName: name, blogText: text });
   };
 
   render() {
@@ -65,17 +66,17 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
+        <h1>Example Blog Post</h1>
+        <h3>Expected Values</h3>
         <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
+          Author Name: John Doe
+          <br />
+          Blog Post: Hello World!
         </p>
-        <p>
-          Try changing the value stored on <strong>line 42</strong> of App.js.
-        </p>
-        <div>The stored value is: {this.state.storageValue}</div>
+
+        <h3>Values Retrieved from Blockchain</h3>
+        <div>Stored Author Name: {this.state.authorName}</div>
+        <div>Stored Blog Post: {this.state.blogText}</div>
       </div>
     );
   }
