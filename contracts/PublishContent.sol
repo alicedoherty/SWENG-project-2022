@@ -27,7 +27,7 @@ contract PublishContent {
         if (searchUser(_id)) return(users[_id-1].name); // _id - 1 is actually necessary...
         userError();
     }
-    function readtext(uint _id) view public returns(string memory) {
+    function readText(uint _id) view public returns(string memory) {
         require(_id != 0, "User does not exist"); // instead of require, so there aren't warnings
         if (searchUser(_id)) return(users[_id-1].text); // _id - 1 is actually necessary...
         userError();
