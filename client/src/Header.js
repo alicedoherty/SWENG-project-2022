@@ -23,7 +23,7 @@ export default function Header(){
     }
 
     return (
-        <AppBar position="fixed" color="primary">
+        <AppBar color="primary" position="fixed">
           <Toolbar>
             <Typography variant="h6">
               LOGOHEAR
