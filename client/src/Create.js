@@ -20,6 +20,7 @@ export default function Create (){
     const [post, setPost] = useState({id:0, title:"", author:"", content:""})
 
     return(
+      <div className = "Create">
         <Container maxWidth="xs">
           <Header/>
           <Paper elevation={1} square sx={{width:600,marginTop:10, backgroundColor:"lightblue", position:"fixed", left:40, top:15}}>
@@ -55,5 +56,12 @@ export default function Create (){
             </Container>
           </Paper>
         </Container>
+
+      </div>
+      
+
+      
+
+        
     );
 }

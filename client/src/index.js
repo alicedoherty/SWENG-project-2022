@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Header from "./Header";
 import Create from "./Create"
+import Post from "./Post"
 
 ReactDOM.render(
     <Router>
@@ -13,6 +14,7 @@ ReactDOM.render(
             <Route exact path= "/" element={<Header/>} />
             <Route exact path= "/create" element={<Create />}/>
             <Route exact path= "/test" element={<App />}/>
+            <Route exact path= "/post-page" element={<Post />}/>
         </Routes>
     </Router>
 

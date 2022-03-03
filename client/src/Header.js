@@ -53,6 +53,11 @@ export default function Header(){
                 <Link underline="none" href="/test" sx={buttonLinkStyle} >
                   TEST!!
                 </Link>
+              </Button>
+              <Button color="primary" sx={buttonStyle}>
+                <Link underline="none" href="/post-page" sx={buttonLinkStyle}>
+                  Post
+                </Link>
               </Button>    
             </Container>
             <Typography variant="h7" > 
