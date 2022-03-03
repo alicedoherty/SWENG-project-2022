@@ -1,11 +1,18 @@
-import React, { Component } from "react";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import React, { Component, createContext } from "react";
+import PublishContentContract from "./contracts/PublishContent.json"
 import getWeb3 from "./getWeb3";
 
 import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = { web3: null,
+    accounts: null,
+    contract: null,
+    authorName: null,
+    blogText: null,
+    inputName: null,
+    inputText: null
+  };
 
   componentDidMount = async () => {
     try {
@@ -17,15 +24,17 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
+      const deployedNetwork = PublishContentContract.networks[networkId];
+      
       const instance = new web3.eth.Contract(
-        SimpleStorageContract.abi,
+        PublishContentContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance }, this.runExample);
+      
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -38,15 +47,32 @@ class App extends Component {
   runExample = async () => {
     const { accounts, contract } = this.state;
 
-    // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+    await contract.methods.create("John Doe", "Hello World!").send({ from: accounts[0] });
 
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
+    // // Get the value from the contract to prove it worked.
+    const name = await contract.methods.readName(1).call();
+    const text = await contract.methods.readText(1).call();
+
+    // // Update state with the result.
+    this.setState({ authorName: name, blogText: text });
+  };
+
+  createUserAndPost(user, text) {
+    const { accounts, contract } = this.state;
+    contract.methods.create(user, text).send({ from: accounts[0] });
+    //this.renderData();
+  }
+
+  renderData = async () => {
+    const { contract } = this.state;
+
+    const latestUserId = await contract.methods.getNextId().call();
+    const name = await contract.methods.readName(latestUserId-1).call();
+    const text = await contract.methods.readText(latestUserId-1).call();
 
     // Update state with the result.
-    this.setState({ storageValue: response });
-  };
+    this.setState({ inputName: name, inputText: text });
+  }
 
   render() {
     if (!this.state.web3) {
@@ -54,17 +80,61 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
+        <h1>Example Blog Post</h1>
+        <h3>Expected Values</h3>
         <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
+          Author Name: John Doe
+          <br />
+          Blog Post: Hello World!
         </p>
-        <p>
-          Try changing the value stored on <strong>line 42</strong> of App.js.
-        </p>
-        <div>The stored value is: {this.state.storageValue}</div>
+
+        <h3>Values Retrieved from Blockchain</h3>
+        <div>Stored Author Name: {this.state.authorName}</div>
+        <div>Stored Blog Post: {this.state.blogText}</div>
+
+        <br />
+
+        <h3>User Inputted Post</h3>
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          this.createUserAndPost(this.user.value, this.text.value);
+        }}>
+          <input 
+            id="newUser"
+            ref={(input) => {
+              this.user = input;
+            }}
+            type="text"
+            placeholder="Username" 
+            equired />
+          <br />
+          <input
+            id="newText"
+            type="text"
+            ref={(input) => {
+              this.text = input;
+            }}
+            placeholder="Text"
+            required />
+
+          <br />
+          <input type="submit" hidden="" />
+
+          <br />
+
+          <h3>Values Retrieved from Blockchain</h3>
+          <div>Stored Author Name: {this.state.inputName}</div>
+          <div>Stored Blog Post: {this.state.inputText}</div>
+        </form>
+
+        <br />
+
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          this.renderData();
+        }}>
+          <input type="submit" value="Get Post" />
+        </form>
       </div>
     );
   }

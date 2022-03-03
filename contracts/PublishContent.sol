@@ -5,31 +5,34 @@ contract PublishContent {
     struct User {
         uint id; // identification used for quick searching\
         string name; // e.g. author's name
-        string[] text; // e.g. blogpost, all posts by this particular user
-        uint postAmount; // num of posts user has
+        //string[] text; // e.g. blogpost, all posts by this particular user
+        string text; // a single post associated with a user
+        //uint postAmount; // num of posts user has
     }
-    string[] public allTexts; // will start at index 0, this array will contain all posts that exist 
+    //string[] public allTexts; // will start at index 0, this array will contain all posts that exist 
     User[] public users;
     uint public nextId = 1; // so many issues with nextId being 0, therefore starting index is 1
 
+    // create new User as well as their first blog post
     function create(string memory _name, string memory _text) public {
-        allTexts.push(_text);
-        users.push(User(nextId, _name, allTexts, 1));
+        //allTexts.push(_text);
+        users.push(User(nextId, _name, _text));
         nextId++;
     }
 
-    // change text e.g. blogpost (modify text)
+    // publish a new blog post (for an existing User)
     // if user does not exist, it will give userError() but cause error, needs fixing
     function publish(uint _id, string memory _text) public mustBeUser(_id) {
-        allTexts.push(_text);
-        users[_id-1].text = allTexts;
-        users[_id-1].postAmount++;
+        users[_id-1].text = _text;
+        //allTexts.push(_text);
+        //users[_id-1].text = allTexts;
+        //users[_id-1].postAmount++;
     }
 
     // basically deletes any post specified in postNum by setting the string to "" the empty string
-    function removePublish(uint _id, uint postNum) public mustBeUser(_id) { 
-        delete users[_id-1].text[postNum];
-    }
+    // function removePublish(uint _id, uint postNum) public mustBeUser(_id) { 
+    //     delete users[_id-1].text[postNum];
+    // }
 
     function readName(uint _id) view public returns(string memory) {
         require(_id != 0, "User does not exist"); // instead of require, so there aren't warnings
@@ -37,10 +40,11 @@ contract PublishContent {
         userError();
     }
 
-    function readtext(uint _id, uint postNum) view public returns(string memory) { // post 0 -> infinity
+    function readText(uint _id) view public returns(string memory) { //, uint postNum) view public returns(string memory) { // post 0 -> infinity
         require(_id != 0, "User does not exist"); // instead of require, so there aren't warnings
         if (searchUser(_id)) {
-            return(users[_id-1].text[postNum]); // _id - 1 is actually necessary...  
+            //return(users[_id-1].text[postNum]); // _id - 1 is actually necessary...  
+            return(users[_id-1].text);
         }
         userError();
     }
@@ -77,5 +81,10 @@ contract PublishContent {
         require(searchUser(_id) == true && _id != 0, "User does not exist");
         _;
     }
+
+    function getNextId() public view returns (uint) {
+        return nextId;
+    }
+
 
 }
