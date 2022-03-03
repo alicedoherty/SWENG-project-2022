@@ -59,8 +59,10 @@ truffle develop
 
 ```
 compile
-migrate --reset
+migrate
 ```
+
+- You can also run `migrate --reset` but this will reset all the data stored in the smart contract (basically clears the "database")
 
 5. To run React app
 
@@ -75,4 +77,11 @@ npm run start
   - Create new network with RPC URL "HTTP://127.0.0.1:7545" and Chain ID "1337"
   - "Import account" using private key of first account on Ganache
 
-   
+## Setting up Ganache
+1. After creating a new workspace (by selecting "Quickstart"), save it by pressing the "Save" button in the top right.
+
+2. Press the settings cog in top right, and press "Add Project" and select the `truffle-config.js` file from the main repo folder.
+
+3. Click the "Contracts" tab and then "PublishContent" to see the data stored in the blockchain.
+
+4. In the "Transactions" tab, you can click on a transaction and see the contract function calls, inputs, etc.
