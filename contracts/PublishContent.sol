@@ -15,9 +15,9 @@ contract PublishContent {
     uint public nextId = 1; // so many issues with nextId being 0, therefore starting index is 1
 
     // create new User as well as their first blog post
-    function create(string memory _name, string memory _text) public {
+    function create(string memory _name, string memory _text, string memory _postTitle) public {
         //allTexts.push(_text);
-        users.push(User(nextId, _name, _text));
+        users.push(User(nextId, _name, _text, _postTitle));
         nextId++;
     }
 
