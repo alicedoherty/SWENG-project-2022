@@ -31,8 +31,8 @@ contract PublishContent {
         users[_id-1].postTitle = _postTitle;
     }
 
-    // basically deletes any post specified in postNum by setting the string to "" the empty string
-    function removePublish(uint _id, uint postNum) public mustBeUser(_id) { 
+    // basically deletes any post given an id 
+    function removePublish(uint _id) public mustBeUser(_id) { 
         delete users[_id-1];
     }
 
