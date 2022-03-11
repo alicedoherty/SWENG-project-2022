@@ -10,15 +10,18 @@ contract PublishContent {
         string postTitle;
     }
 
+    //string[] public allTexts; // will start at index 0, this array will contain all posts that exist 
     User[] public users;
     uint public nextId = 1; // so many issues with nextId being 0, therefore starting index is 1
 
-    function create(string memory _name, string memory _text, string memory _postTitle) public {
-        users.push(User(nextId, _name, _text, _postTitle));
+    // create new User as well as their first blog post
+    function create(string memory _name, string memory _text) public {
+        //allTexts.push(_text);
+        users.push(User(nextId, _name, _text));
         nextId++;
     }
 
-    // change text e.g. blogpost (modify text)
+    // publish a new blog post (for an existing User)
     // if user does not exist, it will give userError() but cause error, needs fixing
     function publish(uint _id, string memory _text) public mustBeUser(_id) {
         users[_id-1].text = _text;
@@ -26,6 +29,11 @@ contract PublishContent {
 
     function renamePostTitle(uint _id, string memory _postTitle) public mustBeUser(_id) {
         users[_id-1].postTitle = _postTitle;
+    }
+
+    // basically deletes any post specified in postNum by setting the string to "" the empty string
+    function removePublish(uint _id, uint postNum) public mustBeUser(_id) { 
+        delete users[_id-1];
     }
 
     function readName(uint _id) view public returns(string memory) {
@@ -77,5 +85,10 @@ contract PublishContent {
         require(searchUser(_id) == true && _id != 0, "User does not exist");
         _;
     }
+
+    function getNextId() public view returns (uint) {
+        return nextId;
+    }
+
 
 }
