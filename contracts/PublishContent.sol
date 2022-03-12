@@ -3,37 +3,46 @@ pragma solidity >=0.4.21 <8.10.0;
 
 contract PublishContent {
 
-    struct User {
-        uint id; // identification used for quick searching\
-        string name; // e.g. author's name
+    struct Posts {
         string text; // e.g. blogpost
         string postTitle;
+        string date; 
+        uint postId;
     }
 
-    //string[] public allTexts; // will start at index 0, this array will contain all posts that exist 
+     struct User {
+        uint id;     // identification used for quick searching
+        string name; // e.g. author's name
+        uint[] postIds; // post id's for all the posts the user owns
+    }
+
+    Posts[] public posts; // all posts 
     User[] public users;
-    uint public nextId = 1; // so many issues with nextId being 0, therefore starting index is 1
+    uint public nextId = 0; // so many issues with nextId being 0, therefore starting index is 1
+
+    function createPost(string memory _text, 
+                        string memory _postTitle, 
+                        string memory _date,
+                        uint _postId) public {             
+        posts.push(Posts(_text, _postTitle, _date, _postId));
+    }
 
     // create new User as well as their first blog post
-    function create(string memory _name, string memory _text, string memory _postTitle) public {
-        //allTexts.push(_text);
-        users.push(User(nextId, _name, _text, _postTitle));
+    function create(uint _id, string memory _name, uint[] memory postIds) public {
+        users.push(User(_id, _name, postIds));
         nextId++;
     }
-
-    // publish a new blog post (for an existing User)
-    // if user does not exist, it will give userError() but cause error, needs fixing
-    function publish(uint _id, string memory _text) public mustBeUser(_id) {
-        users[_id-1].text = _text;
+    function pushPostToUser(uint _id, uint[] memory arrayId) public {
+        users[_id].postIds = arrayId;
     }
 
     function renamePostTitle(uint _id, string memory _postTitle) public mustBeUser(_id) {
-        users[_id-1].postTitle = _postTitle;
+        posts[_id].postTitle = _postTitle;
     }
 
     // basically deletes any post given an id 
     function removePublish(uint _id) public mustBeUser(_id) { 
-        delete users[_id-1];
+        delete users[_id];
     }
 
     function readName(uint _id) view public returns(string memory) {
@@ -42,20 +51,22 @@ contract PublishContent {
         userError();
     }
 
+    function readPostsIdsOfUser(uint _id) view public returns(uint[] memory) {
+        return(users[_id].postIds); // _id - 1 is actually necessary...
+    }
+
     function readtext(uint _id) view public returns(string memory) {
-        require(_id != 0, "User does not exist"); // instead of require, so there aren't warnings
-        if (searchUser(_id)) return(users[_id-1].text); // _id - 1 is actually necessary...
-        userError();
+        // require(_id != 0, "User does not exist"); // instead of require, so there aren't warnings
+        return(posts[_id-1].text); // _id - 1 is actually necessary...
     }
 
     function readPost(uint _id) view public returns(string memory) {
-        require(_id != 0, "User does not exist"); // instead of require, so there aren't warnings
-        if (searchUser(_id)) return(users[_id-1].postTitle); // _id - 1 is actually necessary...
-        userError();
+        return(posts[_id].postTitle); // _id - 1 is actually necessary...
     }
+
     // be very careful when deleting users, because even with mustBeUser, it will cost money, just how solidity works
     function del(uint _id) public mustBeUser(_id) { // del user, will del the user and make the index unusable, *BAD IMPLEMENTATION*
-        delete users[_id-1];
+        delete users[_id];
     }
 
     // internal, call just inside this contract, since view, it will not be on the blockchain view -> read-only function
@@ -89,6 +100,4 @@ contract PublishContent {
     function getNextId() public view returns (uint) {
         return nextId;
     }
-
-
 }
