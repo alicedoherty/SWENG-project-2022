@@ -33,32 +33,32 @@ export default function Header(){
                 <Link underline="none" href="/" sx={buttonLinkStyle}>
                   Home
                 </Link>
-              </Button>  
-              <Button color="primary" sx={buttonStyle} >
-                <Link underline="none" href="/create" sx={buttonLinkStyle}>
-                  Create
-                </Link>
               </Button>
               <Button color="primary" sx={buttonStyle}> 
                 <Link underline="none" href="/search" sx={buttonLinkStyle}>
                   Search
                 </Link>
+              </Button>  
+              <Button color="primary" sx={buttonStyle} >
+                <Link underline="none" href="/create" sx={buttonLinkStyle}>
+                  Create Post
+                </Link>
               </Button>
+              {/* <Button color="primary" sx={buttonStyle}>
+                <Link underline="none" href="/post-page" sx={buttonLinkStyle}>
+                  View Post
+                </Link>
+              </Button> */}
               <Button color="primary" sx={buttonStyle}>
                 <Link underline="none" href="/about-us" sx={buttonLinkStyle}>
                   About Us
                 </Link>
-              </Button>
+              </Button>   
               <Button color="primary" sx={{backgroundColor:"red", "&:hover":{backgroundColor:"gray"}}}>
                 <Link underline="none" href="/test" sx={buttonLinkStyle} >
                   TEST!!
                 </Link>
-              </Button>
-              <Button color="primary" sx={buttonStyle}>
-                <Link underline="none" href="/post-page" sx={buttonLinkStyle}>
-                  Post
-                </Link>
-              </Button>    
+              </Button> 
             </Container>
             <Typography variant="h7" > 
                 Welcome User

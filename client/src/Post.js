@@ -7,9 +7,17 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Stack from '@mui/material/Stack'
+import PropTypes from 'prop-types'
+import { useParams } from 'react-router';
+import post_data from "./data/post_data";
 
 
-export default function Post() {
+function Post(props) {
+    // let {
+    //     post
+    // } = props;
+    const {id} = useParams();
+    const post = post_data[id];
 
     //function createButton()
     
@@ -17,7 +25,6 @@ export default function Post() {
     const userName = "testUser"
     const defaultString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     const testingString = "According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway. Because bees don’t care what humans think is impossible."
-
 
     const changeButtonStyle = { // button styles for buttons under the text box
         position: "relative",
@@ -117,11 +124,13 @@ export default function Post() {
 
 
                 <Typography variant = "h4">
-                    {currentTitle}
+                    {/* {currentTitle} */}
+                    {post.post_title}
                 </Typography>
 
                 <Typography variant= "h5" sx={{position:'relative', left:"75%"}}>
-                    {userName}
+                    {/* {userName} */}
+                    {post.author}
                 </Typography>
 
                 
@@ -173,8 +182,10 @@ export default function Post() {
         </div>
 
     );
-
-
-
-
 }
+
+// Post.propTypes = {
+//     post: PropTypes.object.isRequired
+// };
+
+export default Post;

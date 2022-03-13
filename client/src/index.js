@@ -5,16 +5,18 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Header from "./Header";
-import Create from "./Create"
-import Post from "./Post"
+import Create from "./Create";
+import Post from "./Post";
+import Search from "./Search";
 
 ReactDOM.render(
     <Router>
         <Routes>
             <Route exact path= "/" element={<Header/>} />
             <Route exact path= "/create" element={<Create />}/>
+            <Route exact path= "/posts/:id" element={<Post />}/>
+            <Route exact path= "/search" element={<Search />}/>
             <Route exact path= "/test" element={<App />}/>
-            <Route exact path= "/post-page" element={<Post />}/>
         </Routes>
     </Router>
 
