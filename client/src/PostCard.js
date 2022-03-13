@@ -21,18 +21,18 @@ function PostCard(props) {
         }}
     >
         <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            <Typography sx={{ fontSize: 14 }} gutterBottom>
                 {post.date}
             </Typography>
-            <Typography variant="h5" component="div">
+            <Typography variant="h5" sx={{color:"#1c3564"}} component="div">
                 {post.post_title}
             </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            <Typography sx={{ mb: 1.5, color:"#1c3564"}}>
                 {post.author}
             </Typography>
         </CardContent>
         <CardActions>
-            <Button size="small" component={Link} to={`/posts/${post.id}`}>View Post</Button>
+            <Button sx={{color:"#f37026"}} size="small" component={Link} to={`/posts/${post.id}`}>View Post</Button>
         </CardActions>
       </Card>
 
