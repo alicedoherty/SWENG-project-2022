@@ -2,49 +2,48 @@ import React, {useState} from 'react';
 import Container from '@mui/material/Container';
 import Header from './Header';
 import PostList from './PostList';
+import SearchBar from './SearchBar';
 import post_data from './data/post_data';
 import './Search.css';
 
 
-// const filterFreelancers = (cards, query) => {
-//   if (!query) {
-//       return cards;
-//   }
+const filterPosts = (cards, query) => {
+  if (!query) {
+      return cards;
+  }
 
-//   return cards.filter((card) => {
-//       const cardName = card.name.toLowerCase();
-//       const cardJob = card.job_title.toLowerCase();
-//       const cardSector = card.sector.toLowerCase();
+  return cards.filter((card) => {
+      const cardAuthor = card.author.toLowerCase();
+      const cardTitle = card.post_title.toLowerCase();
 
-//       if(cardName.includes(query))
-//         return cardName.includes(query);
-//       else if(cardJob.includes(query))
-//         return cardJob.includes(query);
-//       else if(cardSector.includes(query))
-//         return cardSector.includes(query);
-//   });
-// };
+      if(cardAuthor.includes(query))
+        return cardAuthor.includes(query);
+      else if(cardTitle.includes(query))
+        return cardTitle.includes(query);
+  });
+};
 
   
 function Search() {
-//   const { search } = window.location;
-//   const query = new URLSearchParams(search).get('s');
-//   const [searchQuery, setSearchQuery] = useState(query || '');
-//   const filteredFreelancers = filterFreelancers(freelancer_info, searchQuery);
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get('s');
+  const [searchQuery, setSearchQuery] = useState(query || '');
+  //const filteredPosts = filterPosts(post_data, searchQuery);
+  const filteredPosts = filterPosts(post_data, searchQuery);
   
       return (
         <div>
         <Header />
         <Container className="content">
-          {/* <SearchBar
+          <SearchBar
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
           />
-          <Filters
+          {/* <Filters
               setSearchQuery={setSearchQuery}
           /> */}
           <PostList
-            post_data={post_data} />
+            post_data={filteredPosts} />
           {/* <Footer /> */}
         </Container>
         </div>
