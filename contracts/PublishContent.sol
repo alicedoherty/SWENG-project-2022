@@ -4,21 +4,21 @@ pragma solidity >=0.4.21 <8.10.0;
 contract PublishContent {
 
     struct Posts {
-        string text; // e.g. blogpost
+        string text;        // e.g. blogpost
         string postTitle;
         string date; 
         uint postId;
     }
 
      struct User {
-        uint id;     // identification used for quick searching
-        string name; // e.g. author's name
-        uint[] postIds; // post id's for all the posts the user owns
+        uint id;            // identification used for quick searching
+        string name;        // e.g. author's name
+        uint[] postIds;     // post id's for all the posts the user owns
     }
 
-    Posts[] public posts; // all posts 
+    Posts[] public posts;   // all posts 
     User[] public users;
-    uint public nextId = 0; // so many issues with nextId being 0, therefore starting index is 1
+    uint public nextId = 0;
 
     function createPost(string memory _text, 
                         string memory _postTitle, 
@@ -27,11 +27,12 @@ contract PublishContent {
         posts.push(Posts(_text, _postTitle, _date, _postId));
     }
 
-    // create new User as well as their first blog post
+    // creates new User and initialises postIds[] with postId of their first post
     function create(uint _id, string memory _name, uint[] memory postIds) public {
         users.push(User(_id, _name, postIds));
         nextId++;
     }
+
     function pushPostToUser(uint _id, uint[] memory arrayId) public {
         users[_id].postIds = arrayId;
     }
@@ -46,22 +47,20 @@ contract PublishContent {
     }
 
     function readName(uint _id) view public returns(string memory) {
-        require(_id != 0, "User does not exist"); // instead of require, so there aren't warnings
-        if (searchUser(_id)) return(users[_id-1].name); // _id - 1 is actually necessary...
+        if (searchUser(_id)) return(users[_id].name);
         userError();
     }
 
     function readPostsIdsOfUser(uint _id) view public returns(uint[] memory) {
-        return(users[_id].postIds); // _id - 1 is actually necessary...
+        return(users[_id].postIds);
     }
 
-    function readtext(uint _id) view public returns(string memory) {
-        // require(_id != 0, "User does not exist"); // instead of require, so there aren't warnings
-        return(posts[_id-1].text); // _id - 1 is actually necessary...
+    function readText(uint _id) view public returns(string memory) {
+        return(posts[_id].text);
     }
 
-    function readPost(uint _id) view public returns(string memory) {
-        return(posts[_id].postTitle); // _id - 1 is actually necessary...
+    function readPostTitle(uint _id) view public returns(string memory) {
+        return(posts[_id].postTitle);
     }
 
     // be very careful when deleting users, because even with mustBeUser, it will cost money, just how solidity works
