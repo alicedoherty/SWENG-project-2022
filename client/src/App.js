@@ -10,8 +10,10 @@ class App extends Component {
     contract: null,
     authorName: null,
     blogText: null,
+    blogTitle: null,
     inputName: null,
-    inputText: null
+    inputText: null,
+    inputTitle: null
   };
 
   componentDidMount = async () => {
@@ -47,31 +49,38 @@ class App extends Component {
   runExample = async () => {
     const { accounts, contract } = this.state;
 
-    await contract.methods.create("John Doe", "Hello World!").send({ from: accounts[0] });
+    // await contract.methods.create("John Doe", "Hello World!", "Post Title :)").send({ from: accounts[0] });
+    await contract.methods.createPost("Hello World!", "Cool Title!", "01/01/2022", 0).send({ from: accounts[0] });
+    await contract.methods.create(0, "John Doe", [0]).send({ from: accounts[0] });
 
     // // Get the value from the contract to prove it worked.
-    const name = await contract.methods.readName(1).call();
-    const text = await contract.methods.readText(1).call();
+    const name = await contract.methods.readName(0).call();
+    const text = await contract.methods.readText(0).call();
+    const title = await contract.methods.readPostTitle(0).call();
 
     // // Update state with the result.
-    this.setState({ authorName: name, blogText: text });
+    this.setState({ authorName: name, blogText: text, blogTitle : title});
   };
-
-  createUserAndPost(user, text) {
+ 
+  createUserAndPost(user, text, title) {
     const { accounts, contract } = this.state;
-    contract.methods.create(user, text).send({ from: accounts[0] });
+    //contract.methods.create(user, text, title).send({ from: accounts[0] });
+    contract.methods.createPost(text, title, "01/01/2022", 1).send({ from: accounts[0] });
+    contract.methods.create(1, user, [1]).send({ from: accounts[0] });
+
     //this.renderData();
   }
 
   renderData = async () => {
     const { contract } = this.state;
 
-    const latestUserId = await contract.methods.getNextId().call();
-    const name = await contract.methods.readName(latestUserId-1).call();
-    const text = await contract.methods.readText(latestUserId-1).call();
+    //const latestUserId = await contract.methods.getNextId().call();
+    const name = await contract.methods.readName(1).call();
+    const text = await contract.methods.readText(1).call();
+    const title = await contract.methods.readPostTitle(1).call();
 
     // Update state with the result.
-    this.setState({ inputName: name, inputText: text });
+    this.setState({ inputName: name, inputText: text, inputTitle : title });
   }
 
   render() {
@@ -86,18 +95,21 @@ class App extends Component {
           Author Name: John Doe
           <br />
           Blog Post: Hello World!
+          <br />
+          Blog Title: Cool Title!
         </p>
 
         <h3>Values Retrieved from Blockchain</h3>
         <div>Stored Author Name: {this.state.authorName}</div>
         <div>Stored Blog Post: {this.state.blogText}</div>
+        <div>Stored Blog Title: {this.state.blogTitle}</div>
 
         <br />
 
         <h3>User Inputted Post</h3>
         <form onSubmit={(event) => {
           event.preventDefault();
-          this.createUserAndPost(this.user.value, this.text.value);
+          this.createUserAndPost(this.user.value, this.text.value, this.title.value);
         }}>
           <input 
             id="newUser"
@@ -116,6 +128,15 @@ class App extends Component {
             }}
             placeholder="Text"
             required />
+          <br />
+          <input
+            id="newTitle"
+            type="title"
+            ref={(input) => {
+              this.title = input;
+            }}
+            placeholder="Title"
+            required />
 
           <br />
           <input type="submit" hidden="" />
@@ -125,6 +146,7 @@ class App extends Component {
           <h3>Values Retrieved from Blockchain</h3>
           <div>Stored Author Name: {this.state.inputName}</div>
           <div>Stored Blog Post: {this.state.inputText}</div>
+          <div>Stored Blog Title: {this.state.inputTitle}</div>
         </form>
 
         <br />
