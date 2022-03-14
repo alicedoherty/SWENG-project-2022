@@ -107,6 +107,7 @@ function Post(props) {
                     width:"100%", height:"10%",
                     borderBottom:1}}>
                         
+<<<<<<< HEAD
                     
                     <Stack // stack for aligning title, author and user icon 
                     direction="row"
@@ -124,6 +125,25 @@ function Post(props) {
                         </Typography>
                     </Stack>
                    
+=======
+                <AccountCircleIcon sx={{position:'relative', left:"95%", top:"5%"}}/>
+
+
+                <Typography variant = "h4">
+                    {/* {currentTitle} */}
+                    {post.post_title}
+                </Typography>
+
+                <Typography variant= "h5" sx={{position:'relative', left:"75%"}}>
+                    {/* {userName} */}
+                    {post.author}
+                </Typography>
+
+                
+
+                
+                
+>>>>>>> 01101e91d62ef1a1d7900eee37dd49672ec57f9a
                 </Box>
 
                 <Box sx ={{ // actual box for text
