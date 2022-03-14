@@ -12,8 +12,6 @@ import Search from "./Search";
 ReactDOM.render(
     <Router>
         <Routes>
-            <Route exact path= "/posts/:id" element={<Post />}/>    
-            <Route exact path= "/search" element={<Search />}/>
             <Route exact path= "/" element={<Home/>} />
             <Route exact path= "/create" element={<Create />}/>
             <Route exact path= "/posts/:id" element={<Post />}/>
@@ -28,3 +26,5 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+
