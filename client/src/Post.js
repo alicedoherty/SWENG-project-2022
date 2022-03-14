@@ -58,7 +58,7 @@ function Post(props) {
             position: 'absolute',
             left:"75%", top:"10vh",
             width:"15%", height:"60vh",
-            bgcolor: '#f0f6ff'}} >
+            bgcolor: '#f7faff'}} >
 
                 <Typography variant = "h5" align = "center" sx={{position:'relative', top:"1%", padding:2, color:"#1c3664"}}>
                     Previous versions
@@ -86,7 +86,7 @@ function Post(props) {
             left: "5%",
             top: "10vh",
             width:"60%", height:"80vh",
-            bgcolor: '#f0f6ff'}} >
+            bgcolor: '#f7faff'}} >
 
             
             <Box m="auto" sx={{ //inner box where the text box goes
@@ -99,7 +99,7 @@ function Post(props) {
                 //left: 40,
                 top: "4%",
                 width:"87.5%", height:"75%",
-                bgcolor: '#f0f6ff'}}>
+                bgcolor: '#f7faff'}}>
 
 
                 <Box sx ={{ //box for the title
@@ -107,7 +107,6 @@ function Post(props) {
                     width:"100%", height:"10%",
                     borderBottom:1}}>
                         
-<<<<<<< HEAD
                     
                     <Stack // stack for aligning title, author and user icon 
                     direction="row"
@@ -125,25 +124,6 @@ function Post(props) {
                         </Typography>
                     </Stack>
                    
-=======
-                <AccountCircleIcon sx={{position:'relative', left:"95%", top:"5%"}}/>
-
-
-                <Typography variant = "h4">
-                    {/* {currentTitle} */}
-                    {post.post_title}
-                </Typography>
-
-                <Typography variant= "h5" sx={{position:'relative', left:"75%"}}>
-                    {/* {userName} */}
-                    {post.author}
-                </Typography>
-
-                
-
-                
-                
->>>>>>> 01101e91d62ef1a1d7900eee37dd49672ec57f9a
                 </Box>
 
                 <Box sx ={{ // actual box for text
