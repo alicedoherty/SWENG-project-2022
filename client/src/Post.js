@@ -13,9 +13,6 @@ import post_data from "./data/post_data";
 
 
 function Post(props) {
-    // let {
-    //     post
-    // } = props;
     const {id} = useParams();
     const post = post_data[id];
 
@@ -32,9 +29,10 @@ function Post(props) {
         border:1,
         borderColor:"rgba(28, 54, 100, .6)",
         color:"#f37026",
-        
+        bgcolor:"#ecf3ff",
+        mt: "2%",
         '&:hover':{
-          //backgroundColor:"#e6f0f7"
+            backgroundColor:"#e6f0f7"
         }
       }
     
@@ -56,12 +54,12 @@ function Post(props) {
             border: 1, 
             borderColor: "#1c3664",
             position: 'absolute',
-            left:"75%", top:"10vh",
-            width:"15%", height:"60vh",
+            left:"70%", top:"10vh",
+            width:"20%", height:"60vh",
             bgcolor: '#f7faff'}} >
 
                 <Typography variant = "h5" align = "center" sx={{position:'relative', top:"1%", padding:2, color:"#1c3664"}}>
-                    Previous versions
+                    Previous Versions
                 </Typography>
 
                 <Container>
@@ -99,7 +97,7 @@ function Post(props) {
                 //left: 40,
                 top: "4%",
                 width:"87.5%", height:"75%",
-                bgcolor: '#f7faff'}}>
+                bgcolor: '#ecf3ff'}}>
 
 
                 <Box sx ={{ //box for the title
@@ -169,9 +167,5 @@ function Post(props) {
 
     );
 }
-
-// Post.propTypes = {
-//     post: PropTypes.object.isRequired
-// };
 
 export default Post;
