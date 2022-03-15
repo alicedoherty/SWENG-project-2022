@@ -30,23 +30,13 @@ function Post(props) {
         position: "relative",
         fontSize:18,
         border:1,
-        borderColor:"black",
-        backgroundColor:"#e6f0f7",
+        borderColor:"rgba(28, 54, 100, .6)",
+        color:"#f37026",
         
         '&:hover':{
           //backgroundColor:"#e6f0f7"
         }
       }
-
-    const textButtonStyle = {
-        position: "relative",
-        fontSize: 14,
-
-        '&:hover':{
-            backgroundColor:"cfe8fc"
-        }
-    }
-    
     
     //hook to change the text inside box
     const [currentTitle, setTitle] = useState("Test")
@@ -58,27 +48,26 @@ function Post(props) {
           <Header/>
         </Container>
 
-
         <Container maxWidth="100%" height="100%"> 
 
         <Box sx={{ //box for buttons
             borderRadius: '4px',
             boxShadow:1,
             border: 1, 
-            borderColor: "rgba(111, 172, 252, .4)",
+            borderColor: "#1c3664",
             position: 'absolute',
             left:"75%", top:"10vh",
             width:"15%", height:"60vh",
-            bgcolor: '#e0f1ff'}} >
+            bgcolor: '#f7faff'}} >
 
-                <Typography variant = "h5" align = "center" sx={{position:'relative', top:"1%", padding:1.5}}>
+                <Typography variant = "h5" align = "center" sx={{position:'relative', top:"1%", padding:2, color:"#1c3664"}}>
                     Previous versions
                 </Typography>
 
                 <Container>
                 <Stack spacing={4}>
-                    <Button color="primary" variant="outlined" sx={changeButtonStyle} onClick={() => setText(testingString)}>
-                        Change text 1
+                    <Button variant="outlined" sx={changeButtonStyle} onClick={() => setText(testingString)}>
+                        Change text
                     </Button>
                     <Button sx={changeButtonStyle} onClick={() => setText(defaultString)}>
                         Revert Text
@@ -92,60 +81,58 @@ function Post(props) {
             borderRadius: '4px',
             boxShadow:1,
             border: 1, 
-            borderColor: "rgba(111, 172, 252, .4)",
+            borderColor: "#1c3664",
             position: 'relative',
             left: "5%",
             top: "10vh",
             width:"60%", height:"80vh",
-            bgcolor: '#e0f1ff'}} >
+            bgcolor: '#f7faff'}} >
 
             
             <Box m="auto" sx={{ //inner box where the text box goes
                 padding: 2.5,
-                borderRadius: '1px',
+                borderRadius: '2px',
                 boxShadow:1,
                 border: 1, 
-                borderColor: "rgba(0,0,0,.5)",
+                borderColor: "rgba(28, 54, 100, .4)",
                 position: 'relative',
                 //left: 40,
                 top: "4%",
                 width:"87.5%", height:"75%",
-                bgcolor: '#e6f0f7'}}>
+                bgcolor: '#f7faff'}}>
 
 
                 <Box sx ={{ //box for the title
                     position: "relative",
                     width:"100%", height:"10%",
-                    bgcolor:"#e6f0f7",
-                    display:"flex",
                     borderBottom:1}}>
                         
-                <AccountCircleIcon sx={{position:'relative', left:"95%", top:"5%"}}/>
-
-
-                <Typography variant = "h4">
-                    {/* {currentTitle} */}
-                    {post.post_title}
-                </Typography>
-
-                <Typography variant= "h5" sx={{position:'relative', left:"75%"}}>
-                    {/* {userName} */}
-                    {post.author}
-                </Typography>
-
-                
-
-                
-                
+                    
+                    <Stack // stack for aligning title, author and user icon 
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    spacing={2}>
+                        <Typography variant = "h4" sx={{color:"#1c3664"}}>
+                        {/* {currentTitle} */}
+                        {post.post_title}
+                        </Typography>
+                        <Typography variant= "h5" sx={{align:"justify", color:"#1c3664"}}>
+                            {/* {userName} */}
+                            {post.author}
+                            <AccountCircleIcon sx={{marginLeft:2}}/>
+                        </Typography>
+                    </Stack>
+                   
                 </Box>
 
                 <Box sx ={{ // actual box for text
                     position: "relative",
                     top:"2%",
                     width:"100%", height:"80%",
-                    bgcolor:"#e6f0f7",}}>
+                    }}>
 
-                <Typography variant = "body1">
+                <Typography variant = "body1" sx ={{color:"#1c3664"}}>
                     {currentText}
                 </Typography>
                 </Box>
@@ -153,7 +140,7 @@ function Post(props) {
             </Box>
 
 
-            <Stack
+            <Stack // aligning buttons below text
             position="relative"
             top="5%" 
             direction="row"
@@ -161,19 +148,18 @@ function Post(props) {
             alignItems="flex-end"
             spacing={4}>
                 
-                <Button sx={changeButtonStyle}>
+                <Button sx={changeButtonStyle} size="small">
                     Add note
                 </Button>
 
-                <Button sx={changeButtonStyle}>
+                <Button sx={changeButtonStyle} size="small">
                     Delete
                 </Button>
 
-                <Button sx={changeButtonStyle}>
+                <Button sx={changeButtonStyle} size="small">
                     Change
                 </Button>
             
-
             </Stack>
 
         </Box>
