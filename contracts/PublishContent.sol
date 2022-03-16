@@ -19,17 +19,18 @@ contract PublishContent {
     Posts[] public posts;   // all posts 
     User[] public users;
     uint public nextId = 0;
+    uint public nextPostId = 0;
 
     function createPost(string memory _text, 
                         string memory _postTitle, 
-                        string memory _date,
-                        uint _postId) public {             
-        posts.push(Posts(_text, _postTitle, _date, _postId));
+                        string memory _date) public {             
+        posts.push(Posts(_text, _postTitle, _date, nextPostId));
+        nextPostId++;
     }
 
     // creates new User and initialises postIds[] with postId of their first post
-    function create(uint _id, string memory _name, uint[] memory postIds) public {
-        users.push(User(_id, _name, postIds));
+    function create(string memory _name, uint[] memory postIds) public {
+        users.push(User(nextId, _name, postIds));
         nextId++;
     }
 
@@ -99,4 +100,5 @@ contract PublishContent {
     function getNextId() public view returns (uint) {
         return nextId;
     }
+    
 }
