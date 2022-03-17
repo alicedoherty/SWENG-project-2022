@@ -18,6 +18,7 @@ function PostCard(props) {
     <Card variant="outlined" 
         sx={{
             mt: 2,
+            bgcolor:"#ecf3ff"
         }}
     >
         <CardContent>

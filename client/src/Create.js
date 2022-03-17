@@ -6,9 +6,10 @@ import getWeb3 from "./getWeb3";
 import Container from '@mui/material/Container'
 import Header from './Header'
 import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack';
+
 
 class Create extends Component {
   state = { web3: null,
@@ -103,11 +104,28 @@ render() {
     this.state.author="Joe Soap"                                         //hardcoded user name
     this.state.content=""
 
+  const changeButtonStyle = { // button styles for buttons under the text box
+    position: "relative",
+    fontSize:18,
+    border:1,
+    borderColor:"rgba(28, 54, 100, .6)",
+    color:"#f37026",
+    bgcolor:"#ecf3ff",
+    mt: "2%",
+    '&:hover':{
+      backgroundColor:"#e6f0f7"
+    }
+  }
     return(
       <div className = "Create">
         <Container maxWidth="xs">
           <Header/>
-          <Paper elevation={1} square sx={{width:600,marginTop:10, backgroundColor:"lightblue", position:"fixed", left:40, top:15}}>
+          <Paper elevation={1} square sx={{width:600,
+              marginTop:10,
+              backgroundColor:"#ecf3ff",
+              position:"fixed",
+              left:"30%",
+              top:"5%"}}>
             <Container disableGutters sx={{padding: 2}}>
               <TextField
                 id="post-title"
@@ -130,15 +148,22 @@ render() {
 
                 }}
               />
-              <Button variant="contained"  sx={{marginTop:2}} 
-                onClick={(e)=>{
-                  //writePostToSystem(post)
-                  e.preventDefault();
-                  this.createUserAndPost(this.state.author, this.state.content, this.state.title);
-                  this.renderData();
-                }}>
-                Post
-              </Button>
+              <Stack
+                    position="relative"
+                    mt="1%"
+                    mb="3%"
+                    direction="row"
+                    justifyContent="center">
+                <Button variant="contained"  sx={changeButtonStyle}
+                  onClick={(e)=>{
+                    //writePostToSystem(post)
+                    e.preventDefault();
+                    this.createUserAndPost(this.state.author, this.state.content, this.state.title);
+                    this.renderData();
+                  }}>
+                  Post
+                </Button>
+              </Stack>
             </Container>
           </Paper>
         </Container>
