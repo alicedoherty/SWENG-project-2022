@@ -56,7 +56,7 @@ return(
                 position: 'absolute',
                 left: "4%",
                 top: "10%",
-                width:"50%", height:"90%",
+                width:"50%", height:"87%",
                 bgcolor: '#f7faff'}} >
 
                 
@@ -138,7 +138,6 @@ return(
                         
                 <Stack
                     position="relative"
-                    mt="1%"
                     mb="1%"
                     direction="row"
                     justifyContent="center"
@@ -207,7 +206,7 @@ return(
             position: 'absolute',
             left:"60%",
             top: "55%",
-            width:"35%", height:"45%",
+            width:"35%", height:"42%",
             bgcolor: '#f7faff'}} >
             
             <Box m="auto" sx={{ //inner box where the text box goes
@@ -248,7 +247,7 @@ return(
             </Box>
             <Stack
                     position="relative"
-                    mt="8%"
+                    mt="5%"
                     direction="row"
                     justifyContent="center"
                     >
