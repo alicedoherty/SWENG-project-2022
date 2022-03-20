@@ -1,13 +1,23 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.21 <8.10.0;
+pragma experimental ABIEncoderV2;
 
 contract PublishContent {
 
+    //event createPost()
+
     struct Posts {
-        string text;        // e.g. blogpost
         string postTitle;
-        string date; 
         uint postId;
+        uint[] postVersions;
+    }
+
+    struct PostVersion {
+        uint postVersionid; // same as postId for Posts
+        string author;
+        string postTitle; // same as postTitle for Posts
+        string postText; 
+        string date;
     }
 
      struct User {
@@ -18,14 +28,24 @@ contract PublishContent {
 
     Posts[] public posts;   // all posts 
     User[] public users;
+    PostVersion[] public postVersions; // all versions of posts
+
     uint public nextId = 0;
     uint public nextPostId = 0;
 
-    function createPost(string memory _text, 
-                        string memory _postTitle, 
-                        string memory _date) public {             
-        posts.push(Posts(_text, _postTitle, _date, nextPostId));
+    function createPost(string memory postTitle, 
+                        uint postId, string memory author, 
+                        string memory postText, string memory date, 
+                        uint[] memory postVersionId) public {     
+        postVersions.push(PostVersion(0, author, postTitle, postText, date));   
+        posts.push(Posts(postTitle, postId, postVersionId));
         nextPostId++;
+    }
+    function editPost(uint postVersionid, string memory author,
+                      string memory postTitle, string memory postText,
+                      string memory date) public {
+        //PostVersion[] storage postVersions; 
+        postVersions.push(PostVersion(postVersionid, author, postTitle, postText, date));
     }
 
     // creates new User and initialises postIds[] with postId of their first post
@@ -56,8 +76,28 @@ contract PublishContent {
         return(users[_id].postIds);
     }
 
-    function readText(uint _id) view public returns(string memory) {
-        return(posts[_id].text);
+    function readPostsfromPostVersions(uint _id) view public returns(uint[] memory) {
+        return(posts[_id].postVersions);
+    }
+
+    function readVersionPostVersionid(uint _id) view public returns(uint) {
+        return(postVersions[_id].postVersionid);
+    }
+
+    function readVersionPostTitle(uint _id) view public returns(string memory) {
+        return(postVersions[_id].postTitle);
+    }
+
+    function readVersionPostText(uint _id) view public returns(string memory) {
+        return(postVersions[_id].postText);
+    }
+
+    function readVerisonDate(uint _id) view public returns(string memory) {
+        return(postVersions[_id].date);
+    }
+
+    function readVerisonAuthor(uint _id) view public returns(string memory) {
+        return(postVersions[_id].author);
     }
 
     function readPostTitle(uint _id) view public returns(string memory) {
