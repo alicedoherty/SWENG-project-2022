@@ -109,6 +109,7 @@ const post_data = [
                 and unlike government-issued currencies, it is operated by a decentralized authority.`,
 	            date: "18/01/21",
 	            change_type: "Edit"
+                //text taken from https://www.investopedia.com/terms/b/bitcoin.asp
             }
         ]
     }
