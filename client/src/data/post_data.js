@@ -1,28 +1,28 @@
 const post_data = [
     {
-    id: 0,
-    postVersions: [
-	    {
-	            post_version_id: 0,
-	            author: "Adam Hayes",
-	            post_title:"Blockchain",
-	            post_text:"A blockchain is a distributed database that is shared among the nodes of a computer network. As a database, a blockchain stores information electronically in digital format.",
-	            date: "01/01/01",
-	            change_type: "Create"
-        },
-        {
-	            post_version_id: 1,
-	            author: " JeFreda R. Brown",
-	            post_title: "Everything about Blockchain",
-	            post_text: `A blockchain is a distributed database that is shared among the nodes of a computer network. 
-                As a database, a blockchain stores information electronically in digital format. 
-                Blockchains are best known for their crucial role in cryptocurrency systems, such as Bitcoin, for maintaining a secure and decentralized record of transactions. 
-                The innovation with a blockchain is that it guarantees the fidelity and security of a record of data and generates trust without the need for a trusted third party.`,
-	            date: "02/01/01",
-	            change_type: "Edit"
-                //text taken from https://www.investopedia.com/terms/b/blockchain.asp
-        }
-                ]
+        id: 0,
+        postVersions: [
+            {
+                    post_version_id: 0,
+                    author: "Adam Hayes",
+                    post_title:"Blockchain",
+                    post_text:"A blockchain is a distributed database that is shared among the nodes of a computer network. As a database, a blockchain stores information electronically in digital format.",
+                    date: "01/01/01",
+                    change_type: "Create"
+            },
+            {
+                    post_version_id: 1,
+                    author: "JeFreda R. Brown",
+                    post_title: "Everything about Blockchain",
+                    post_text: `A blockchain is a distributed database that is shared among the nodes of a computer network. 
+                    As a database, a blockchain stores information electronically in digital format. 
+                    Blockchains are best known for their crucial role in cryptocurrency systems, such as Bitcoin, for maintaining a secure and decentralized record of transactions. 
+                    The innovation with a blockchain is that it guarantees the fidelity and security of a record of data and generates trust without the need for a trusted third party.`,
+                    date: "02/01/01",
+                    change_type: "Edit"
+                    //text taken from https://www.investopedia.com/terms/b/blockchain.asp
+            }
+        ]
     },
     {
         id: 1,
@@ -43,7 +43,7 @@ const post_data = [
             {
 	            post_version_id: 1,
 	            author: "Benjamin Murphay",
-	            post_title: "Trinity College Dublin: A breif history",
+	            post_title: "Trinity College Dublin: A brief history",
 	            post_text: `Trinity College (Irish: Coláiste na Tríonóide), officially The Provost, Fellows, Foundation Scholars and the other members of Board, 
                 of the College of the Holy and Undivided Trinity of Queen Elizabeth near Dublin,
                 is the sole constituent college of the University of Dublin, a research university in Dublin, Ireland. 
