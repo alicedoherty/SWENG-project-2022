@@ -13,7 +13,7 @@ const post_data = [
         {
 	            post_version_id: 1,
 	            author: " JeFreda R. Brown",
-	            post_title: "Updated title",
+	            post_title: "Everything about Blockchain",
 	            post_text: `A blockchain is a distributed database that is shared among the nodes of a computer network. 
                 As a database, a blockchain stores information electronically in digital format. 
                 Blockchains are best known for their crucial role in cryptocurrency systems, such as Bitcoin, for maintaining a secure and decentralized record of transactions. 
