@@ -37,8 +37,10 @@ function Post(props) {
       }
     
     //hook to change the text inside box
-    const [currentTitle, setTitle] = useState("Test")
-    const [currentText, setText] = useState(defaultString)
+    
+    const [currentTitle, setTitle] = useState(post.postVersions[post.postVersions.length-1].post_title)
+    const [currentText, setText] = useState(post.postVersions[post.postVersions.length-1].post_text)
+    const [currentAuthor, setAuthor] = useState(post.postVersions[post.postVersions.length-1].author)
 
     return(
         <div className='Post'>
@@ -64,11 +66,12 @@ function Post(props) {
 
                 <Container>
                 <Stack spacing={4}>
-                    <Button variant="outlined" sx={changeButtonStyle} onClick={() => setText(testingString)}>
-                        Change text
+                    <Button variant="outlined" sx={changeButtonStyle} onClick={() => [setText(post.postVersions[post.postVersions.length-1].post_text), 
+                    setAuthor(post.postVersions[post.postVersions.length-1].author), setTitle(post.postVersions[post.postVersions.length-1].post_title) ]}>
+                        Current Version
                     </Button>
-                    <Button sx={changeButtonStyle} onClick={() => setText(defaultString)}>
-                        Revert Text
+                    <Button sx={changeButtonStyle} onClick={ () => [setText(post.postVersions[0].post_text), setAuthor(post.postVersions[0].author), setTitle(post.postVersions[0].post_title) ] }>
+                        Previous Version
                     </Button>
 
                 </Stack>
@@ -113,11 +116,11 @@ function Post(props) {
                     spacing={2}>
                         <Typography variant = "h4" sx={{color:"#1c3664"}}>
                         {/* {currentTitle} */}
-                        {post.post_title}
+                        {currentTitle}
                         </Typography>
                         <Typography variant= "h5" sx={{align:"justify", color:"#1c3664"}}>
                             {/* {userName} */}
-                            {post.author}
+                            {currentAuthor}
                             <AccountCircleIcon sx={{marginLeft:2}}/>
                         </Typography>
                     </Stack>
