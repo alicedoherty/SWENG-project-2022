@@ -72,7 +72,7 @@ const post_data = [
             {
 	            post_version_id: 1,
 	            author: "Dan Walker",
-	            post_title: "Updated the 'I love blogs' blog post",
+	            post_title: "The Native Irish Dogs",
 	            post_text: `The Native Irish Dogs which have been developed down the centuries in the mountains, woods and bogs of Ireland are the legacy we have inherited from our forefathers.
                 We are proud of the number of counties, which have adopted our dogs and are pleased with the way they have been absorbed into their new environment and cultures.                
                 There are nine Native Dogs of Ireland, two Hounds 

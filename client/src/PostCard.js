@@ -23,13 +23,13 @@ function PostCard(props) {
     >
         <CardContent>
             <Typography sx={{ fontSize: 14 }} gutterBottom>
-                {post.date}
+                {post.postVersions[post.postVersions.length-1].date}
             </Typography>
             <Typography variant="h5" sx={{color:"#1c3564"}} component="div">
-                {post.post_title}
+                {post.postVersions[post.postVersions.length-1].post_title}
             </Typography>
             <Typography sx={{ mb: 1.5, color:"#1c3564"}}>
-                {post.author}
+                {post.postVersions[post.postVersions.length-1].author}
             </Typography>
         </CardContent>
         <CardActions>
