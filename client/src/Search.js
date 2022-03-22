@@ -16,10 +16,10 @@ const filterPosts = (cards, query) => {
       const cardAuthor = card.postVersions[1].author.toLowerCase();
       const cardTitle = card.postVersions[1].post_title.toLowerCase();
 
-      if(cardAuthor.includes(query))
-        return cardAuthor.includes(query);
-      else if(cardTitle.includes(query))
-        return cardTitle.includes(query);
+      if(cardAuthor.includes(query.toLowerCase()))
+        return cardAuthor.includes(query.toLowerCase());
+      else if(cardTitle.includes(query.toLowerCase()))
+        return cardTitle.includes(query.toLowerCase());
   });
 };
 
