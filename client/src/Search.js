@@ -13,8 +13,8 @@ const filterPosts = (cards, query) => {
   }
 
   return cards.filter((card) => {
-      const cardAuthor = card.author.toLowerCase();
-      const cardTitle = card.post_title.toLowerCase();
+      const cardAuthor = card.postVersions[1].author.toLowerCase();
+      const cardTitle = card.postVersions[1].post_title.toLowerCase();
 
       if(cardAuthor.includes(query))
         return cardAuthor.includes(query);
