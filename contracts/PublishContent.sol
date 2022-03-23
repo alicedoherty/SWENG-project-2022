@@ -32,20 +32,22 @@ contract PublishContent {
 
     uint public nextId = 0;
     uint public nextPostId = 0;
+    uint public nextpostVersionid = 0;
 
     function createPost(string memory postTitle, 
-                        uint postId, string memory author, 
+                        string memory author, 
                         string memory postText, string memory date, 
                         uint[] memory postVersionId) public {     
-        postVersions.push(PostVersion(0, author, postTitle, postText, date));   
-        posts.push(Posts(postTitle, postId, postVersionId));
+        postVersions.push(PostVersion(nextpostVersionid, author, postTitle, postText, date));   
+        posts.push(Posts(postTitle, nextPostId, postVersionId));
         nextPostId++;
+        nextpostVersionid++;
     }
-    function editPost(uint postVersionid, string memory author,
+    function editPost(string memory author,
                       string memory postTitle, string memory postText,
                       string memory date) public {
-        //PostVersion[] storage postVersions; 
-        postVersions.push(PostVersion(postVersionid, author, postTitle, postText, date));
+        postVersions.push(PostVersion(nextpostVersionid, author, postTitle, postText, date));
+        nextpostVersionid++;
     }
 
     // creates new User and initialises postIds[] with postId of their first post
