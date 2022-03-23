@@ -60,16 +60,13 @@ componentDidMount = async () => {
 /*
 runExample = async () => {                                                                                                        //leaving in hello world example for the moment but this can be removed
   const { accounts, contract } = this.state;
-
   // await contract.methods.create("John Doe", "Hello World!", "Post Title :)").send({ from: accounts[0] });
   await contract.methods.createPost("Hello World!", "Cool Title!", "01/01/2022", 0).send({ from: accounts[0] });
   await contract.methods.create(0, "John Doe", [0]).send({ from: accounts[0] });
-
   // // Get the value from the contract to prove it worked.
   const name = await contract.methods.readName(0).call();
   const text = await contract.methods.readText(0).call();
   const title = await contract.methods.readPostTitle(0).call();
-
   // // Update state with the result.
   this.setState({ authorName: name, blogText: text, blogTitle : title});
 };
@@ -78,8 +75,8 @@ runExample = async () => {                                                      
 createUserAndPost(user, text, title) {
   const { accounts, contract } = this.state;
   //contract.methods.create(user, text, title).send({ from: accounts[0] });
-  contract.methods.createPost(text, title, "01/01/2022", 1).send({ from: accounts[0] });              //hardcoded date and userID hardcoded to 1
-  contract.methods.create(1, user, [1]).send({ from: accounts[0] });                                  //userID also hardcoded here
+  contract.methods.createPost(title, user, text, "01/01/2022", [1]).send({ from: accounts[0] });              //hardcoded date and userID hardcoded to 1
+  contract.methods.create(user, [1]).send({ from: accounts[0] });                                  //userID also hardcoded here
 
   //this.renderData();
 }
