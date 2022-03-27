@@ -15,12 +15,12 @@ class Create extends Component {
   state = { web3: null,
     accounts: null,
     contract: null,
-    authorName: null,
-    blogText: null,
-    blogTitle: null,
-    inputName: null,
-    inputText: null,
-    inputTitle: null
+    // authorName: null,
+    // blogText: null,
+    // blogTitle: null,
+    // inputName: null,
+    // inputText: null,
+    // inputTitle: null
   };
 
 /*function writePostToSystem(post){
@@ -75,8 +75,8 @@ runExample = async () => {                                                      
 createUserAndPost(user, text, title) {
   const { accounts, contract } = this.state;
   //contract.methods.create(user, text, title).send({ from: accounts[0] });
-  contract.methods.createPost(title, user, text, "01/01/2022", [1]).send({ from: accounts[0] });              //hardcoded date and userID hardcoded to 1
-  contract.methods.create(user, [1]).send({ from: accounts[0] });                                  //userID also hardcoded here
+  contract.methods.createPost(title, user, text, "01/01/2022", [0]).send({ from: accounts[0] });              //hardcoded date and userID hardcoded to 1
+  contract.methods.create(user, [0]).send({ from: accounts[0] });                                  //userID also hardcoded here
 
   //this.renderData();
 }
@@ -85,12 +85,12 @@ renderData = async () => {
   const { contract } = this.state;
 
   //const latestUserId = await contract.methods.getNextId().call();
-  const name = await contract.methods.readName(1).call();
-  const text = await contract.methods.readText(1).call();
-  const title = await contract.methods.readPostTitle(1).call();
+  // const name = await contract.methods.readName(1).call();
+  // const text = await contract.methods.readText(1).call();
+  // const title = await contract.methods.readPostTitle(1).call();
 
   // Update state with the result.
-  this.setState({ inputName: name, inputText: text, inputTitle : title });
+  // this.setState({ inputName: name, inputText: text, inputTitle : title });
 }
     
 render() {
@@ -98,7 +98,7 @@ render() {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
     this.state.title=""
-    this.state.author="Joe Soap"                                         //hardcoded user name
+    this.state.author=""                                         //hardcoded user name
     this.state.content=""
 
   const changeButtonStyle = { // button styles for buttons under the text box
@@ -130,6 +130,16 @@ render() {
                 variant="standard"
                 onChange={(e) => {
                   this.state.title = e.target.value                                                 //reads in title
+                  //let cont = post.content
+                  //setPost({id:ids, title:tit, author:auth, content:cont})
+                }}
+              />
+              <TextField
+                id="post-author"
+                label="Author"
+                variant="standard"
+                onChange={(e) => {
+                  this.state.author = e.target.value                                                 //reads in title
                   //let cont = post.content
                   //setPost({id:ids, title:tit, author:auth, content:cont})
                 }}
