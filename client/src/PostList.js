@@ -7,16 +7,15 @@ class PostList extends React.Component {
   render() {
     return (
       <Container>
-        {/* <Row className ="justify-content-md-center" style={{display:'flex'}}> */}
-            {
-              this.props.postData.map(post => (
-                <PostCard
-                  key={post.id}
-                  post={post} />
-              ))
-            }
-          {/* </Row> */}
-      </Container>      
+        {
+          this.props.postData.map(post => (
+            <PostCard
+              key={post.id}
+              post={post} />
+          ))
+        }
+        {/* </Row> */}
+      </Container>
     );
   }
 }

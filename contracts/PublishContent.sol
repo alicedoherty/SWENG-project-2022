@@ -1,35 +1,35 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.21 <8.10.0;
-pragma experimental ABIEncoderV2;
+// pragma experimental ABIEncoderV2;
 
 contract PublishContent {
     struct Post {
-        //string postTitle;
         uint postId;
+        // A post is associated with one or more "versions" of the post
+        // This postVersions[] will contain the indexes of its post versions stored in the public PostVersion[] postVersions array
         uint[] postVersions;
-        //uint postVersionsCount;
     }
 
     struct PostVersion {
-        uint postVersionid; // same as postId for Posts
+        uint postVersionid;
         string author;
-        string postTitle; // same as postTitle for Posts
+        string postTitle;
         string postText; 
         string date;
     }
 
-    //  struct User {
+    // struct User {
     //     uint id;            // identification used for quick searching
     //     string name;        // e.g. author's name
     //     uint[] postIds;     // post id's for all the posts the user owns
     // }
 
-    Post[] public posts;   // all posts 
-    //uint public postCount = 0;
-    //User[] public users;
-    PostVersion[] public postVersions; // all versions of posts
+    // All posts
+    Post[] public posts;
 
-    // uint public nextId = 0;
+    // All versions of all posts
+    PostVersion[] public postVersions;
+
     uint public nextPostId = 0;
     uint public nextPostVersionId = 0;
 
@@ -41,21 +41,25 @@ contract PublishContent {
                         string memory date) public {   
         delete initialPostVersions;
         initialPostVersions.push(nextPostVersionId);
+
         posts.push(Post(nextPostId, initialPostVersions)); 
-        postVersions.push(PostVersion(nextPostVersionId, author, postTitle, postText, date));   
+
+        postVersions.push(PostVersion(nextPostVersionId, author, postTitle, postText, date)); 
+
         nextPostId++;
         nextPostVersionId++;
-        //postCount++;
     }
+
     function editPost(uint postId,
                         string memory postTitle,
                         string memory author,
                         string memory postText,
                         string memory date) public {
         postVersions.push(PostVersion(nextPostVersionId, author, postTitle, postText, date));
+
         posts[postId].postVersions.push(nextPostVersionId);
-        nextPostVersionId++;
-        //posts[postId].postVersionsCount = posts[postId].postVersionsCount++;
+
+        nextPostVersionId++;    
     }
 
     function getPostCount() public view returns(uint) {
@@ -91,7 +95,6 @@ contract PublishContent {
         return(postVersions[postVersionId].date);
     }
     
-
     // function readPostsfromPostVersions(uint _id) view public returns(uint[] memory) {
     //     return(posts[_id].postVersions);
     // }

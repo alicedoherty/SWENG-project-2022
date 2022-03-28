@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 
@@ -7,17 +7,18 @@ import Home from "./Home"
 import Create from "./Create"
 import Post from "./Post";
 import Search from "./Search";
+import Edit from "./Edit";
 
 import PublishContentContract from "./contracts/PublishContent.json"
 import getWeb3 from "./getWeb3";
 
 
 class App extends Component {
-  state = { 
-    web3: null, 
-    accounts: null, 
+  state = {
+    web3: null,
+    accounts: null,
     contract: null,
-    postData: [], 
+    postData: [],
   };
 
   componentDidMount = async () => {
@@ -48,6 +49,7 @@ class App extends Component {
     }
   };
 
+  // Helper function to populate blockchain with sample data - not currently used
   createTestData = async () => {
     const { accounts, contract } = this.state;
 
@@ -59,8 +61,9 @@ class App extends Component {
     await contract.methods.editPost(0, "Cool Title!1.2", "John Doe1.2", "Hello World!1.2", "01/01/2022").send({ from: accounts[0] });
     await contract.methods.editPost(1, "Cool Title!2.2", "John Doe2.2", "Hello World!2.2", "01/01/2022").send({ from: accounts[0] });
     await contract.methods.editPost(1, "Cool Title!2.3", "John Doe2.3", "Hello World!2.3", "01/01/2022").send({ from: accounts[0] });
-  } 
+  }
 
+  // Load data from blockchain and populate 'postData' state variable with the data
   loadData = async () => {
     const contract = this.state.contract;
     let postData = this.state.postData;
@@ -69,7 +72,7 @@ class App extends Component {
 
     for (let x = 0; x < postCount; x++) {
       let postVersionsCount = await contract.methods.getPostVersionsCount(x).call();
-      
+
       var postVersions = [];
       for (let y = 0; y < postVersionsCount; y++) {
         let postVersionId = await contract.methods.getPostVersionId(x, y).call();
@@ -77,10 +80,9 @@ class App extends Component {
         let title = await contract.methods.readTitle(postVersionId).call();
         let text = await contract.methods.readText(postVersionId).call();
         let date = await contract.methods.readDate(postVersionId).call();
-        
+
         // Note: above postVersionId refers to the position of the postVersion in PostVersion[] postVersions in PublishContent.sol
         // post_version_id in the JSON object refers to version of that specific post (i.e 0, 1, 2, ...)
-
         var postVersion = {
           "post_version_id": y,
           "author": author,
@@ -97,8 +99,8 @@ class App extends Component {
       }
 
       postData.push(post);
-      this.setState({postData: postData});
-      console.log(this.state.postData);
+      this.setState({ postData: postData });
+      //console.log(this.state.postData);
     }
   }
 
@@ -107,15 +109,16 @@ class App extends Component {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
-        <Router>
-            <Routes>
-                <Route exact path= "/" element={<Home/>} />
-                <Route exact path= "/create" element={<Create web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} />}/>
-                <Route exact path= "/posts/:id" element={<Post postData={this.state.postData} />}/>
-                <Route exact path= "/search" element={<Search postData={this.state.postData} />}/>
-                <Route exact path= "/test" element={<App />}/>
-            </Routes>
-        </Router>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/create" element={<Create web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} />} />
+          <Route exact path="/posts/:id" element={<Post postData={this.state.postData} />} />
+          <Route exact path="/edit/:id" element={<Edit web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} />} />
+          <Route exact path="/search" element={<Search postData={this.state.postData} />} />
+          <Route exact path="/test" element={<App />} />
+        </Routes>
+      </Router>
     );
   }
 }

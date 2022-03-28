@@ -1,3 +1,5 @@
+// Old App.js file used for testing blockchain functions - not currently used
+
 import React, { Component, createContext } from "react";
 import PublishContentContract from "./contracts/PublishContent.json"
 import getWeb3 from "./getWeb3";
@@ -5,7 +7,8 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { web3: null,
+  state = {
+    web3: null,
     accounts: null,
     contract: null,
     authorName: null,
@@ -36,7 +39,7 @@ class App extends Component {
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = PublishContentContract.networks[networkId];
-      
+
       const instance = new web3.eth.Contract(
         PublishContentContract.abi,
         deployedNetwork && deployedNetwork.address,
@@ -45,7 +48,7 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance }, this.runExample);
-      
+
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -69,14 +72,14 @@ class App extends Component {
     // // Get the value from the contract to prove it worked.
     const postZeroVersionCount = await contract.methods.getPostVersions(0).call();
     const postOneVersionCount = await contract.methods.getPostVersionsCount(1).call();
-    
+
     //const id = postZeroVersions;
     // const name = await contract.methods.readAuthor(id).call();
     // const title = await contract.methods.readPostTitle(id).call();
     // const text = await contract.methods.readPostText(id).call();
     // // // Update state with the result.
     //this.setState({ authorName: name, blogText: text, blogTitle : title});
-    this.setState({ authorName: postZeroVersionCount});
+    this.setState({ authorName: postZeroVersionCount });
 
     // const name1 = await contract.methods.readAuthor(postZeroVersions[1].parseInt()).call();
     // const title1 = await contract.methods.readPostTitle(postZeroVersions[1].parseInt()).call();
@@ -86,7 +89,7 @@ class App extends Component {
     // this.setState({ authorName1: name1, blogText1: text1, blogTitle1 : title1});
 
   };
- 
+
   // createUserAndPost(user, text, title) {
   //   const { accounts, contract } = this.state;
   //   //contract.methods.create(user, text, title).send({ from: accounts[0] });
