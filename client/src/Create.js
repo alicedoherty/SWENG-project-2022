@@ -9,12 +9,17 @@ import Paper from '@mui/material/Paper'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack';
+import PropTypes from 'prop-types';
 
 
 class Create extends Component {
-  state = { web3: null,
-    accounts: null,
-    contract: null,
+  state = { 
+    title: null,
+    author: null,
+    content: null,
+    // web3: null,
+    // accounts: null,
+    // contract: null,
     // authorName: null,
     // blogText: null,
     // blogTitle: null,
@@ -23,39 +28,35 @@ class Create extends Component {
     // inputTitle: null
   };
 
-/*function writePostToSystem(post){
-      console.log(post)
-}
- */
-componentDidMount = async () => {
-  try {
-    // Get network provider and web3 instance.
-    const web3 = await getWeb3();
+// componentDidMount = async () => {
+//   try {
+//     // Get network provider and web3 instance.
+//     const web3 = await getWeb3();
 
-    // Use web3 to get the user's accounts.
-    const accounts = await web3.eth.getAccounts();
+//     // Use web3 to get the user's accounts.
+//     const accounts = await web3.eth.getAccounts();
 
-    // Get the contract instance.
-    const networkId = await web3.eth.net.getId();
-    const deployedNetwork = PublishContentContract.networks[networkId];
+//     // Get the contract instance.
+//     const networkId = await web3.eth.net.getId();
+//     const deployedNetwork = PublishContentContract.networks[networkId];
     
-    const instance = new web3.eth.Contract(
-      PublishContentContract.abi,
-      deployedNetwork && deployedNetwork.address,
-    );
+//     const instance = new web3.eth.Contract(
+//       PublishContentContract.abi,
+//       deployedNetwork && deployedNetwork.address,
+//     );
 
-    // Set web3, accounts, and contract to the state, and then proceed with an
-    // example of interacting with the contract's methods.
-    this.setState({ web3, accounts, contract: instance })//,this.runExample);
+//     // Set web3, accounts, and contract to the state, and then proceed with an
+//     // example of interacting with the contract's methods.
+//     this.setState({ web3, accounts, contract: instance })//,this.runExample);
     
-  } catch (error) {
-    // Catch any errors for any of the above operations.
-    alert(
-      `Failed to load web3, accounts, or contract. Check console for details.`,
-    );
-    console.error(error);
-  }
-};
+//   } catch (error) {
+//     // Catch any errors for any of the above operations.
+//     alert(
+//       `Failed to load web3, accounts, or contract. Check console for details.`,
+//     );
+//     console.error(error);
+//   }
+// };
 
 /*
 runExample = async () => {                                                                                                        //leaving in hello world example for the moment but this can be removed
@@ -73,28 +74,31 @@ runExample = async () => {                                                      
 */
 
 createUserAndPost(user, text, title) {
-  const { accounts, contract } = this.state;
+  //const { accounts, contract } = this.state;
+  const accounts = this.props.accounts;
+  const contract = this.props.contract;
   //contract.methods.create(user, text, title).send({ from: accounts[0] });
-  contract.methods.createPost(title, user, text, "01/01/2022", [0]).send({ from: accounts[0] });              //hardcoded date and userID hardcoded to 1
-  contract.methods.create(user, [0]).send({ from: accounts[0] });                                  //userID also hardcoded here
+  contract.methods.createPost(title, user, text, "01/01/2022").send({ from: accounts[0] });              //hardcoded date and userID hardcoded to 1
+  //contract.methods.create(user, [0]).send({ from: accounts[0] });                                  //userID also hardcoded here
 
   //this.renderData();
 }
 
-renderData = async () => {
-  const { contract } = this.state;
+// renderData = async () => {
+//   const { contract } = this.state;
 
-  //const latestUserId = await contract.methods.getNextId().call();
-  // const name = await contract.methods.readName(1).call();
-  // const text = await contract.methods.readText(1).call();
-  // const title = await contract.methods.readPostTitle(1).call();
+//   //const latestUserId = await contract.methods.getNextId().call();
+//   // const name = await contract.methods.readName(1).call();
+//   // const text = await contract.methods.readText(1).call();
+//   // const title = await contract.methods.readPostTitle(1).call();
 
-  // Update state with the result.
-  // this.setState({ inputName: name, inputText: text, inputTitle : title });
-}
+//   // Update state with the result.
+//   // this.setState({ inputName: name, inputText: text, inputTitle : title });
+// }
     
 render() {
-  if (!this.state.web3) {
+  //if (!this.state.web3) {
+  if (!this.props.web3) {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
     this.state.title=""
@@ -166,7 +170,7 @@ render() {
                     //writePostToSystem(post)
                     e.preventDefault();
                     this.createUserAndPost(this.state.author, this.state.content, this.state.title);
-                    this.renderData();
+                    // this.renderData();
                   }}>
                   Post
                 </Button>
@@ -179,5 +183,17 @@ render() {
     );
   }
 }
+
+Create.propTypes = {
+  web3: PropTypes.object,
+  accounts: PropTypes.array,
+  contract: PropTypes.object
+};
+
+Create.defaultProps ={
+  web3: null,
+  accounts: [],
+  contract: null
+};
 
 export default Create;

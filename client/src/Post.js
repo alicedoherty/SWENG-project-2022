@@ -9,12 +9,15 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Stack from '@mui/material/Stack'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router';
-import post_data from "./data/post_data";
+//import post_data from "./data/post_data";
 
 
 function Post(props) {
+    let {
+        postData
+    } = props;
     const {id} = useParams();
-    const post = post_data[id];
+    const post = postData[id];
 
     //function createButton()
     
@@ -170,5 +173,13 @@ function Post(props) {
 
     );
 }
+
+Post.propTypes = {
+    postData: PropTypes.arrayOf(PropTypes.object).isRequired
+  };
+  
+Post.defaultProps = {
+    postData: []
+};
 
 export default Post;

@@ -3,7 +3,8 @@ import Container from '@mui/material/Container';
 import Header from './Header';
 import PostList from './PostList';
 import SearchBar from './SearchBar';
-import post_data from './data/post_data';
+//import post_data from './data/post_data';
+import PropTypes from 'prop-types';
 import './Search.css';
 
 
@@ -24,12 +25,16 @@ const filterPosts = (cards, query) => {
 };
 
   
-function Search() {
+function Search(props) {
+  let {
+    postData
+  } = props;
+
   const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
   const [searchQuery, setSearchQuery] = useState(query || '');
   //const filteredPosts = filterPosts(post_data, searchQuery);
-  const filteredPosts = filterPosts(post_data, searchQuery);
+  const filteredPosts = filterPosts(postData, searchQuery);
   
       return (
         <div>
@@ -43,12 +48,20 @@ function Search() {
               setSearchQuery={setSearchQuery}
           /> */}
           <PostList
-            post_data={filteredPosts} />
-          {/* <Footer /> */}
+            // post_data={filteredPosts} />
+            postData={filteredPosts} />
         </Container>
         </div>
       );
 }
+
+Search.propTypes = {
+  postData: PropTypes.arrayOf(PropTypes.object).isRequired
+};
+
+Search.defaultProps = {
+  postData: []
+};
   
 export default Search;
 
