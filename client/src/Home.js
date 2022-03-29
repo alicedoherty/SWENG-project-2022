@@ -1,4 +1,3 @@
-//import React from 'react'
 import React, { useState } from 'react';
 import Container from '@mui/material/Container'
 import Header from './Header'
@@ -35,7 +34,7 @@ const changeButtonStyle = { // button styles for buttons under the text box
     }
 }
 
-//hook to change the text inside box
+// //hook to change the text inside box
 const [currentTitle, setTitle] = useState("Post")
 const [currentText, setText] = useState(defaultString)
 

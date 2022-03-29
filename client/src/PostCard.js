@@ -15,27 +15,27 @@ function PostCard(props) {
 
 
   return (
-    <Card variant="outlined" 
-        sx={{
-            mt: 2,
-            bgcolor:"#ecf3ff"
-        }}
+    <Card variant="outlined"
+      sx={{
+        mt: 2,
+        bgcolor: "#ecf3ff"
+      }}
     >
-        <CardContent>
-            <Typography sx={{ fontSize: 14 }} gutterBottom>
-                {post.postVersions[post.postVersions.length-1].date}
-            </Typography>
-            <Typography variant="h5" sx={{color:"#1c3564"}} component="div">
-                {post.postVersions[post.postVersions.length-1].post_title}
-            </Typography>
-            <Typography sx={{ mb: 1.5, color:"#1c3564"}}>
-                {post.postVersions[post.postVersions.length-1].author}
-            </Typography>
-        </CardContent>
-        <CardActions>
-            <Button sx={{color:"#f37026"}} size="small" component={Link} to={`/posts/${post.id}`}>View Post</Button>
-        </CardActions>
-      </Card>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} gutterBottom>
+          {post.postVersions[post.postVersions.length - 1].date}
+        </Typography>
+        <Typography variant="h5" sx={{ color: "#1c3564" }} component="div">
+          {post.postVersions[post.postVersions.length - 1].post_title}
+        </Typography>
+        <Typography sx={{ mb: 1.5, color: "#1c3564" }}>
+          {post.postVersions[post.postVersions.length - 1].author}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button sx={{ color: "#f37026" }} size="small" component={Link} to={`/posts/${post.id}`}>View Post</Button>
+      </CardActions>
+    </Card>
   );
 }
 

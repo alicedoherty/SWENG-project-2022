@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { useParams } from 'react-router';
+
 import Container from '@mui/material/Container'
 import Header from './Header'
 import Paper from '@mui/material/Paper'
@@ -8,21 +10,28 @@ import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
 
 
-class Create extends Component {
+class Edit extends Component {
   state = {
+    id: null,
     title: null,
     author: null,
     content: null,
   };
 
-  createUserAndPost(user, text, title) {
+  componentDidMount() {
+    // Sets state id to the id of the post being edited
+    const { id } = this.props.params;
+    this.state.id = id;
+  }
+
+  createUserAndPost(id, user, text, title) {
     const accounts = this.props.accounts;
     const contract = this.props.contract;
 
     var today = new Date();
     var date = String(today.getDate()) + '/' + String(today.getMonth() + 1) + '/' + String(today.getFullYear());
 
-    contract.methods.createPost(title, user, text, date).send({ from: accounts[0] });
+    contract.methods.editPost(id, title, user, text, date).send({ from: accounts[0] });
   }
 
   render() {
@@ -30,8 +39,8 @@ class Create extends Component {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
 
-    // Button styles for buttons under the text box
-    const changeButtonStyle = {
+    // Button styles for buttons under the text box 
+    const changeButtonStyle = { 
       position: "relative",
       fontSize: 18,
       border: 1,
@@ -92,7 +101,7 @@ class Create extends Component {
                 <Button variant="contained" sx={changeButtonStyle}
                   onClick={(e) => {
                     e.preventDefault();
-                    this.createUserAndPost(this.state.author, this.state.content, this.state.title);
+                    this.createUserAndPost(this.state.id, this.state.author, this.state.content, this.state.title);
                   }}>
                   Post
                 </Button>
@@ -100,22 +109,26 @@ class Create extends Component {
             </Container>
           </Paper>
         </Container>
-
       </div>
     );
   }
 }
 
-Create.propTypes = {
+Edit.propTypes = {
   web3: PropTypes.object,
   accounts: PropTypes.array,
   contract: PropTypes.object
 };
 
-Create.defaultProps = {
+Edit.defaultProps = {
   web3: null,
   accounts: [],
   contract: null
 };
 
-export default Create;
+export default (props) => (
+  <Edit
+    {...props}
+    params={useParams()}
+  />
+);
