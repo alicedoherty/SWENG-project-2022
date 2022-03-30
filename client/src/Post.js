@@ -7,6 +7,8 @@ import Button from '@mui/material/Button'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Stack from '@mui/material/Stack'
 import PropTypes from 'prop-types';
+import AuditCard from './AuditCard';
+import { List } from '@mui/material';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 
@@ -156,7 +158,18 @@ function Post(props) {
                     </Stack>
 
                 </Box>
+                <Container>
+                    <Box sx={{position:"absolute", top:"95%", bgcolor: '#f7faff', border: 1, borderColor:"#1c3664", width:1000}}>
+                        <List sx={{maxHeight:"100%", overflow:"auto", padding:"10px"}}>
+                            {post.postVersions.map(post => <AuditCard post={post}/>)}
+                        </List>
+                    </Box>    
+        
+                </Container>
+                
             </Container>
+
+            
 
         
         
