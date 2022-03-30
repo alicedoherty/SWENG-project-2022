@@ -38,6 +38,8 @@ function Post(props) {
     const [currentText, setText] = useState(post.postVersions[post.postVersions.length - 1].post_text)
     const [currentAuthor, setAuthor] = useState(post.postVersions[post.postVersions.length - 1].author)
 
+    const arrayLength =  post.postVersions.length;
+    
     return (
         <div className='Post'>
             <Container maxWidth="xs">
@@ -63,14 +65,12 @@ function Post(props) {
 
                     <Container>
                         <Stack spacing={4}>
-                            <Button variant="outlined" sx={changeButtonStyle} onClick={() => [setText(post.postVersions[post.postVersions.length - 1].post_text),
-                            setAuthor(post.postVersions[post.postVersions.length - 1].author), setTitle(post.postVersions[post.postVersions.length - 1].post_title)]}>
-                                Current Version
-                            </Button>
-                            {/* Previous version button currently sets post to the first version of the post (first entry in postVersions[]) */}
-                            <Button sx={changeButtonStyle} onClick={() => [setText(post.postVersions[0].post_text), setAuthor(post.postVersions[0].author), setTitle(post.postVersions[0].post_title)]}>
-                                Previous Version
-                            </Button>
+                        {
+                        post.postVersions.slice(0).reverse().map(post => 
+                            <Button variant = "outlined" sx={{color: "#f37026",changeButtonStyle}} onClick={() => [setText(post.post_text), setAuthor(post.author), setTitle(post.post_title)]} >
+                                {post.post_version_id==(arrayLength-1) ? "Current Version - " + post.date :  "Version " + (post.post_version_id+1) +" - " + post.date}       {/*+1 so versions start from 1, better readability for user */ }
+                            </Button>)
+                        }
 
                         </Stack>
                     </Container>
@@ -151,8 +151,7 @@ function Post(props) {
                         spacing={4}>
                         <Button sx={changeButtonStyle} size="small">
                             {/* Links to edit page for that particular post (id is the id of the post) */}
-                            <Link to={`/edit/${id}`}>Edit Post</Link>
-                        </Button>
+                            <Link to={`/edit/${id}`} style = {{color: '#f37026', textDecoration: 'none'}}>Edit Post</Link>                        </Button>
 
                     </Stack>
 
