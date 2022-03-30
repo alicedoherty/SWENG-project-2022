@@ -1,19 +1,24 @@
-import React, { Component, createContext } from "react";
-import PublishContentContract from "./contracts/PublishContent.json"
-import getWeb3 from "./getWeb3";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 
+import Home from "./Home"
+import Create from "./Create"
+import Post from "./Post";
+import Search from "./Search";
+import Edit from "./Edit";
+
+import PublishContentContract from "./contracts/PublishContent.json"
+import getWeb3 from "./getWeb3";
+
+
 class App extends Component {
-  state = { web3: null,
+  state = {
+    web3: null,
     accounts: null,
     contract: null,
-    authorName: null,
-    blogText: null,
-    blogTitle: null,
-    inputName: null,
-    inputText: null,
-    inputTitle: null
+    postData: [],
   };
 
   componentDidMount = async () => {
@@ -27,7 +32,6 @@ class App extends Component {
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = PublishContentContract.networks[networkId];
-      
       const instance = new web3.eth.Contract(
         PublishContentContract.abi,
         deployedNetwork && deployedNetwork.address,
@@ -35,8 +39,7 @@ class App extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
-      
+      this.setState({ web3, accounts, contract: instance }, this.loadData);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -46,41 +49,59 @@ class App extends Component {
     }
   };
 
-  runExample = async () => {
+  // Helper function to populate blockchain with sample data - not currently used
+  createTestData = async () => {
     const { accounts, contract } = this.state;
 
-    // await contract.methods.create("John Doe", "Hello World!", "Post Title :)").send({ from: accounts[0] });
-    await contract.methods.createPost("Hello World!", "Cool Title!", "01/01/2022", 0).send({ from: accounts[0] });
-    await contract.methods.create(0, "John Doe", [0]).send({ from: accounts[0] });
+    // Create test posts
+    await contract.methods.createPost("Cool Title!1.1", "John Doe1.1", "Hello World!1.1", "01/01/2022").send({ from: accounts[0] });
+    await contract.methods.createPost("Cool Title!2.1", "John Doe2.1", "Hello World!2.1", "01/01/2022").send({ from: accounts[0] });
 
-    // // Get the value from the contract to prove it worked.
-    const name = await contract.methods.readName(0).call();
-    const text = await contract.methods.readText(0).call();
-    const title = await contract.methods.readPostTitle(0).call();
-
-    // // Update state with the result.
-    this.setState({ authorName: name, blogText: text, blogTitle : title});
-  };
- 
-  createUserAndPost(user, text, title) {
-    const { accounts, contract } = this.state;
-    //contract.methods.create(user, text, title).send({ from: accounts[0] });
-    contract.methods.createPost(text, title, "01/01/2022", 1).send({ from: accounts[0] });
-    contract.methods.create(1, user, [1]).send({ from: accounts[0] });
-
-    //this.renderData();
+    // Create test edits to posts
+    await contract.methods.editPost(0, "Cool Title!1.2", "John Doe1.2", "Hello World!1.2", "01/01/2022").send({ from: accounts[0] });
+    await contract.methods.editPost(1, "Cool Title!2.2", "John Doe2.2", "Hello World!2.2", "01/01/2022").send({ from: accounts[0] });
+    await contract.methods.editPost(1, "Cool Title!2.3", "John Doe2.3", "Hello World!2.3", "01/01/2022").send({ from: accounts[0] });
   }
 
-  renderData = async () => {
-    const { contract } = this.state;
+  // Load data from blockchain and populate 'postData' state variable with the data
+  loadData = async () => {
+    const contract = this.state.contract;
+    let postData = this.state.postData;
 
-    //const latestUserId = await contract.methods.getNextId().call();
-    const name = await contract.methods.readName(1).call();
-    const text = await contract.methods.readText(1).call();
-    const title = await contract.methods.readPostTitle(1).call();
+    let postCount = await contract.methods.getPostCount().call();
 
-    // Update state with the result.
-    this.setState({ inputName: name, inputText: text, inputTitle : title });
+    for (let x = 0; x < postCount; x++) {
+      let postVersionsCount = await contract.methods.getPostVersionsCount(x).call();
+
+      var postVersions = [];
+      for (let y = 0; y < postVersionsCount; y++) {
+        let postVersionId = await contract.methods.getPostVersionId(x, y).call();
+        let author = await contract.methods.readAuthor(postVersionId).call();
+        let title = await contract.methods.readTitle(postVersionId).call();
+        let text = await contract.methods.readText(postVersionId).call();
+        let date = await contract.methods.readDate(postVersionId).call();
+
+        // Note: above postVersionId refers to the position of the postVersion in PostVersion[] postVersions in PublishContent.sol
+        // post_version_id in the JSON object refers to version of that specific post (i.e 0, 1, 2, ...)
+        var postVersion = {
+          "post_version_id": y,
+          "author": author,
+          "post_title": title,
+          "post_text": text,
+          "date": date,
+        }
+        postVersions.push(postVersion);
+      }
+
+      var post = {
+        "id": x,
+        "postVersions": postVersions
+      }
+
+      postData.push(post);
+      this.setState({ postData: postData });
+      //console.log(this.state.postData);
+    }
   }
 
   render() {
@@ -88,76 +109,16 @@ class App extends Component {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
-      <div className="App">
-        <h1>Example Blog Post</h1>
-        <h3>Expected Values</h3>
-        <p>
-          Author Name: John Doe
-          <br />
-          Blog Post: Hello World!
-          <br />
-          Blog Title: Cool Title!
-        </p>
-
-        <h3>Values Retrieved from Blockchain</h3>
-        <div>Stored Author Name: {this.state.authorName}</div>
-        <div>Stored Blog Post: {this.state.blogText}</div>
-        <div>Stored Blog Title: {this.state.blogTitle}</div>
-
-        <br />
-
-        <h3>User Inputted Post</h3>
-        <form onSubmit={(event) => {
-          event.preventDefault();
-          this.createUserAndPost(this.user.value, this.text.value, this.title.value);
-        }}>
-          <input 
-            id="newUser"
-            ref={(input) => {
-              this.user = input;
-            }}
-            type="text"
-            placeholder="Username" 
-            equired />
-          <br />
-          <input
-            id="newText"
-            type="text"
-            ref={(input) => {
-              this.text = input;
-            }}
-            placeholder="Text"
-            required />
-          <br />
-          <input
-            id="newTitle"
-            type="title"
-            ref={(input) => {
-              this.title = input;
-            }}
-            placeholder="Title"
-            required />
-
-          <br />
-          <input type="submit" hidden="" />
-
-          <br />
-
-          <h3>Values Retrieved from Blockchain</h3>
-          <div>Stored Author Name: {this.state.inputName}</div>
-          <div>Stored Blog Post: {this.state.inputText}</div>
-          <div>Stored Blog Title: {this.state.inputTitle}</div>
-        </form>
-
-        <br />
-
-        <form onSubmit={(event) => {
-          event.preventDefault();
-          this.renderData();
-        }}>
-          <input type="submit" value="Get Post" />
-        </form>
-      </div>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/create" element={<Create web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} />} />
+          <Route exact path="/posts/:id" element={<Post postData={this.state.postData} />} />
+          <Route exact path="/edit/:id" element={<Edit web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} />} />
+          <Route exact path="/search" element={<Search postData={this.state.postData} />} />
+          <Route exact path="/test" element={<App />} />
+        </Routes>
+      </Router>
     );
   }
 }

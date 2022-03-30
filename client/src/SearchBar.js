@@ -11,11 +11,11 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
                 type="text"
                 id="header-search"
                 placeholder="Search Posts"
-                name="s" 
+                name="s"
             />
         </FormControl>
     );
-    
+
 };
 
 export default SearchBar;

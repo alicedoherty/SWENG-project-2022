@@ -1,4 +1,3 @@
-
 import React from 'react'
 import Typography from '@mui/material/Typography'
 import AppBar from '@mui/material/AppBar'
@@ -55,21 +54,11 @@ export default function Header(){
                   Create Post
                 </Link>
               </Button>
-              {/* <Button color="primary" sx={buttonStyle}>
-                <Link underline="none" href="/post-page" sx={buttonLinkStyle}>
-                  View Post
-                </Link>
-              </Button> */}
-              {/* <Button sx={buttonStyle}>
-                <Link underline="none" href="/about-us" sx={buttonLinkStyle}>
-                  About Us
-                </Link>
-              </Button>    */}
-              <Button sx={{backgroundColor:"red", "&:hover":{backgroundColor:"gray"}}}>
+              {/* <Button sx={{backgroundColor:"red", "&:hover":{backgroundColor:"gray"}}}>
                 <Link underline="none" href="/test" sx={buttonLinkStyle} >
                   TEST!!
                 </Link>
-              </Button> 
+              </Button>  */}
             </Container>
             <Typography variant="h7" sx={{color:"#1c3564"}} > 
                 Welcome User

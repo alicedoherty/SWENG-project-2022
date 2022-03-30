@@ -1,4 +1,6 @@
-const post_data = [
+// No longer being used
+
+var post_data = [
     {
         id: 0,
         postVersions: [
