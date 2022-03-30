@@ -22,9 +22,13 @@ const filterPosts = (cards, query) => {
       return cardTitle.includes(query.toLowerCase());
   });
 };
- 
-  
-function Search() {
+
+
+function Search(props) {
+  let {
+    postData
+  } = props;
+
   const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
   const [searchQuery, setSearchQuery] = useState(query || '');
