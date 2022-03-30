@@ -37,7 +37,7 @@ function PostCard(props) {
         </CardActions>
       </Card>
   );
-}
+} 
 
 PostCard.propTypes = {
   post: PropTypes.object.isRequired

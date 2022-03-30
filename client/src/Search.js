@@ -22,7 +22,7 @@ const filterPosts = (cards, query) => {
         return cardTitle.includes(query.toLowerCase());
   });
 };
-
+ 
   
 function Search() {
   const { search } = window.location;

@@ -7,9 +7,10 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Stack from '@mui/material/Stack'
-import PropTypes from 'prop-types'
 import { useParams } from 'react-router';
 import post_data from "./data/post_data";
+import AuditCard from './AuditCard';
+import { List } from '@mui/material';
 
 
 function Post(props) {
@@ -65,15 +66,13 @@ function Post(props) {
                 </Typography>
 
                 <Container>
-                <Stack spacing={4}>
-                    <Button variant="outlined" sx={changeButtonStyle} onClick={() => [setText(post.postVersions[post.postVersions.length-1].post_text), 
-                    setAuthor(post.postVersions[post.postVersions.length-1].author), setTitle(post.postVersions[post.postVersions.length-1].post_title) ]}>
-                        Current Version
-                    </Button>
-                    <Button sx={changeButtonStyle} onClick={ () => [setText(post.postVersions[0].post_text), setAuthor(post.postVersions[0].author), setTitle(post.postVersions[0].post_title) ] }>
-                        Previous Version
-                    </Button>
-
+                <Stack spacing={3}>
+                    {
+                        post.postVersions.map(post => 
+                            <Button sx={{changeButtonStyle}} onClick={() => [setText(post.post_text), setAuthor(post.author), setTitle(post.post_title)]} >
+                                version {post.post_version_id}
+                            </Button>)
+                    }
                 </Stack>
                 </Container>
         </Box>
@@ -164,8 +163,23 @@ function Post(props) {
             </Stack>
 
         </Box>
-        </Container>
 
+        <Container>
+            <Box sx={{position:"relative", top:"100%", bgcolor: '#f7faff', border: 1, borderColor:"#1c3664", width:1000}}>
+                <List sx={{maxHeight:"100%", overflow:"auto", padding:"10px"}}>
+                    {post.postVersions.map(post => <AuditCard post={post}/>)}
+                </List>
+            </Box>    
+        
+        </Container>
+        
+        
+        
+        </Container>
+        
+
+        
+        
         </div>
 
     );
