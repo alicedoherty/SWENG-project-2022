@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { useParams } from 'react-router';
 
 import Container from '@mui/material/Container'
@@ -8,8 +8,16 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import { Link } from 'react-router-dom';
 
 
+// title saying editing
+// display text of the latest post you just clicked.
+//be able to edit the content
+
+// :() emoticon 
 class Edit extends Component {
   state = {
     id: null,
@@ -18,11 +26,15 @@ class Edit extends Component {
     content: null,
   };
 
-  componentDidMount() {
-    // Sets state id to the id of the post being edited
-    const { id } = this.props.params;
-    this.state.id = id;
-  }
+  
+//  function Edit(props) {
+//    let {
+//     postData
+//   } = props;
+
+//   const { id } = useParams();
+//   const post = postData[id];
+
 
   createUserAndPost(id, user, text, title) {
     const accounts = this.props.accounts;
@@ -52,6 +64,13 @@ class Edit extends Component {
         backgroundColor: "#e6f0f7"
       }
     }
+
+     // Hook to change the text inside box
+    // Will display the most recent version of the post (i.e the last object in the postVersions array)
+    // const [currentTitle, setTitle] = useState(post.postVersions[post.postVersions.length - 1].post_title)
+    // const [currentText, setText] = useState(post.postVersions[post.postVersions.length - 1].post_text)
+    // const [currentAuthor, setAuthor] = useState(post.postVersions[post.postVersions.length - 1].author)
+
     return (
       <div className="Create">
         <Container maxWidth="xs">
@@ -65,15 +84,23 @@ class Edit extends Component {
             top: "5%"
           }}>
             <Container disableGutters sx={{ padding: 2 }}>
-              <TextField
-                id="post-title"
-                label="Title"
-                variant="standard"
-                onChange={(e) => {
+              {/* //<TextField
+                //id="post-title"
+                //label="Title"
+               // variant="standard"
+                //onChange={(e) => {
                   // Reads in title
-                  this.state.title = e.target.value
-                }}
-              />
+                  // this.state.title = e.target.value
+                
+                //}}
+                // /> */}
+
+                <Typography 
+                variant="body1" sx={{ color: "#1c3664" }}>
+                                {post.postVersions[post.postVersions.length - 1].post_text}
+                </Typography>
+      
+              
               <TextField
                 id="post-author"
                 label="Author"
@@ -83,6 +110,32 @@ class Edit extends Component {
                   this.state.author = e.target.value
                 }}
               />
+              <Box sx={{ //outer box containing the text box
+                borderRadius: '2px',
+                boxShadow: 1,
+                border: 1, 
+                borderColor: "#1c3664",
+                position: 'absolute',
+                left: "-44%",
+                top: "0%",
+                width:"35%", height:"10%",
+                bgcolor: '#f7faff'}} >
+
+                
+                <Box  sx ={{
+                  position: "relative",
+                  top:8, left: 8,
+                  width:1000, height:10,
+                  //bgcolor:"#ecf3ff",
+                  color:"#1c3564",
+               }}>
+                
+                  <Typography variant = "h4">
+                    {'Editing Post:'}
+                  </Typography>
+                </Box>
+              </Box>
+
               <TextField multiline rows={15} sx={{ marginTop: 2 }}
                 id="post-content"
                 label="Content"
@@ -117,13 +170,15 @@ class Edit extends Component {
 Edit.propTypes = {
   web3: PropTypes.object,
   accounts: PropTypes.array,
-  contract: PropTypes.object
+  contract: PropTypes.object,
+  postData: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 Edit.defaultProps = {
   web3: null,
   accounts: [],
-  contract: null
+  contract: null,
+  postData: []
 };
 
 export default (props) => (
