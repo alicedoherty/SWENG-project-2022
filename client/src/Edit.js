@@ -26,15 +26,11 @@ class Edit extends Component {
     content: null,
   };
 
-  
-//  function Edit(props) {
-//    let {
-//     postData
-//   } = props;
-
-//   const { id } = useParams();
-//   const post = postData[id];
-
+  constructor(props) {
+    super(props);
+    const { id } = this.props.params;
+    this.state.id = id;
+  }
 
   createUserAndPost(id, user, text, title) {
     const accounts = this.props.accounts;
@@ -65,14 +61,11 @@ class Edit extends Component {
       }
     }
 
-     // Hook to change the text inside box
-    // Will display the most recent version of the post (i.e the last object in the postVersions array)
-    // const [currentTitle, setTitle] = useState(post.postVersions[post.postVersions.length - 1].post_title)
-    // const [currentText, setText] = useState(post.postVersions[post.postVersions.length - 1].post_text)
-    // const [currentAuthor, setAuthor] = useState(post.postVersions[post.postVersions.length - 1].author)
+    const post = this.props.postData[this.state.id];
+    const latestPost = post.postVersions[post.postVersions.length - 1];
 
     return (
-      <div className="Create">
+      <div className="Edit">
         <Container maxWidth="xs">
           <Header />
           <Paper elevation={1} square sx={{
@@ -84,22 +77,23 @@ class Edit extends Component {
             top: "5%"
           }}>
             <Container disableGutters sx={{ padding: 2 }}>
-              {/* //<TextField
-                //id="post-title"
-                //label="Title"
-               // variant="standard"
-                //onChange={(e) => {
+              <TextField
+                id="post-title"
+                label="Title"
+                variant="standard"
+                defaultValue={latestPost.post_title}
+                onChange={(e) => {
                   // Reads in title
-                  // this.state.title = e.target.value
-                
-                //}}
-                // /> */}
-
-                <Typography 
-                variant="body1" sx={{ color: "#1c3664" }}>
-                                {post.postVersions[post.postVersions.length - 1].post_text}
-                </Typography>
-      
+                  this.state.title = e.target.value;
+                  
+                  // this.state.title = latestPost.post_title;
+                  // if (e.target.value ==  null) {
+                  //   this.state.title = latestPost.post_title
+                  // } else {
+                  //   this.state.title = e.target.value
+                  // }
+                }}
+                />
               
               <TextField
                 id="post-author"
@@ -168,9 +162,9 @@ class Edit extends Component {
 }
 
 Edit.propTypes = {
-  web3: PropTypes.object,
-  accounts: PropTypes.array,
-  contract: PropTypes.object,
+  web3: PropTypes.object.isRequired,
+  accounts: PropTypes.array.isRequired,
+  contract: PropTypes.object.isRequired,
   postData: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 

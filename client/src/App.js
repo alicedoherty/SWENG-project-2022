@@ -114,7 +114,7 @@ class App extends Component {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/create" element={<Create web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} />} />
           <Route exact path="/posts/:id" element={<Post postData={this.state.postData} />} />
-          <Route exact path="/edit/:id" element={<Edit web3={this.state.web3} postData={this.state.postData} accounts={this.state.accounts} contract={this.state.contract} />} />
+          <Route exact path="/edit/:id" element={<Edit web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} postData={this.state.postData} />} />
           <Route exact path="/search" element={<Search postData={this.state.postData} />} />
           <Route exact path="/test" element={<App />} />
         </Routes>
