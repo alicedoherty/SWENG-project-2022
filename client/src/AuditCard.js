@@ -15,26 +15,26 @@ function AuditCard(props) {
     return(
         <Card variant = "outlined"
         sx={{
-            height:"10%",
+            height:"8%",
             bgcolor:"#ecf3ff"
         }}
         >
-            <CardContent sx={{display:"flex",}}>
-                <Stack direction="row" spacing = {5} justifyContent="center">
-                    <Typography variant = "body1">
-                        {post.change_type}
+            <CardContent sx={{display:"flex"}}>
+                
+                    <Typography variant = "h5" sx={{ color: "#1c3664" }}>
+                        {post.post_version_id}
                     </Typography>
-                    <Typography variant = "body1">
+                    <Typography variant = "h5" sx={{ color: "#1c3664", position:"absolute", left:"20%" }}>
                         {post.date}
                     </Typography>
-                    <Typography variant = "body1">
+                    <Typography variant = "h5" sx={{ color: "#1c3664", position:"absolute", left:"37%"  }}>
                         {post.author}
                     </Typography>
-                    <Typography variant = "body1">
+                    <Typography variant = "h5" sx={{ color: "#1c3664", position:"absolute", left:"62%"   }}>
                         {post.post_title}
                     </Typography>
 
-                </Stack>
+                
 
             </CardContent>
         </Card>
