@@ -22,7 +22,7 @@ function AuditCard(props) {
             <CardContent sx={{display:"flex"}}>
                 
                     <Typography variant = "h5" sx={{ color: "#1c3664" }}>
-                        {post.post_version_id}
+                        {post.post_version_id+1}
                     </Typography>
                     <Typography variant = "h5" sx={{ color: "#1c3664", position:"absolute", left:"18%" }}>
                         {post.date}
