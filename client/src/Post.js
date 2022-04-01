@@ -176,7 +176,7 @@ function Post(props) {
                                 <Typography variant="h5" sx={{fontsize:14, position:"absolute", left:"37%"}}>
                                     Author
                                 </Typography>
-                                <Typography variant="h5" sx={{fontsize:14, position:"absolute", left:"60%"}}>
+                                <Typography variant="h5" sx={{fontsize:14, position:"absolute", left:"59%"}}>
                                     Title
                                 </Typography>
                             </Stack>

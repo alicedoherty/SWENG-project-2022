@@ -24,13 +24,13 @@ function AuditCard(props) {
                     <Typography variant = "h5" sx={{ color: "#1c3664" }}>
                         {post.post_version_id}
                     </Typography>
-                    <Typography variant = "h5" sx={{ color: "#1c3664", position:"absolute", left:"20%" }}>
+                    <Typography variant = "h5" sx={{ color: "#1c3664", position:"absolute", left:"18%" }}>
                         {post.date}
                     </Typography>
-                    <Typography variant = "h5" sx={{ color: "#1c3664", position:"absolute", left:"37%"  }}>
+                    <Typography variant = "h5" sx={{ color: "#1c3664", position:"absolute", left:"36%"  }}>
                         {post.author}
                     </Typography>
-                    <Typography variant = "h5" sx={{ color: "#1c3664", position:"absolute", left:"62%"   }}>
+                    <Typography variant = "h5" sx={{ color: "#1c3664", position:"absolute", left:"60%",  }}>
                         {post.post_title}
                     </Typography>
 
