@@ -33,10 +33,8 @@ const changeButtonStyle = { // button styles for buttons under the text box
 
 console.log(postData);
 console.log(postData[0]);
-//var index = parseInt("0");
-//console.log(postData[0].postVersions[1]);
-//const post = postData[index].postVersions[index];
-//console.log(post.postVersions[index]);
+//console.log(postData[0].postVersions[0]);
+//console.log(postData[0].postVersions.length);
 
 // //hook to change the text inside box
 //const [currentTitle, setTitle] = useState("Post")
@@ -88,7 +86,7 @@ return(
                         borderBottom:1}}>
                     <Typography variant = "h4">
                         {/* {currentTitle} */}
-                        {/* {postData[0].postVersions[0].post_title} */}
+                        {postData[0].postVersions[0].post_title}
                     </Typography>
                     </Box>
 
@@ -100,7 +98,7 @@ return(
 
                     <Typography variant = "body1">
                         {/* {currentText} */}
-                        {/* {postData[0].postVersions[0].post_text} */}
+                        {postData[0].postVersions[0].post_text}
                     </Typography>
                     </Box>
                 </Box>
@@ -128,7 +126,7 @@ return(
                         borderBottom:1}}>
                     <Typography variant = "h4">
                         {/* {currentTitle} */}
-                        {/* {postData[0].postVersions[0].post_title} */}
+                        {postData[0].postVersions[0].post_title}
                     </Typography>
                     </Box>
 
@@ -140,7 +138,7 @@ return(
 
                     <Typography variant = "body1">
                         {/* {currentText} */}
-                        {/* {postData[0].postVersions[0].post_text} */}
+                        {postData[0].postVersions[0].post_text}
                     </Typography>
                     </Box>
                 </Box>
@@ -230,7 +228,31 @@ Home.propTypes = {
 };
   
 Home.defaultProps = {
-    postData: []
+    postData: [{
+        id: 0,
+        postVersions: [
+            {
+                    post_version_id: 0,
+                    author: "Adam Hayes",
+                    post_title:"Blockchain",
+                    post_text:"A blockchain is a distributed database that is shared among the nodes of a computer network. As a database, a blockchain stores information electronically in digital format.",
+                    date: "01/01/01",
+                    change_type: "Create"
+            },
+            {
+                    post_version_id: 1,
+                    author: "JeFreda R. Brown",
+                    post_title: "Everything about Blockchain",
+                    post_text: `A blockchain is a distributed database that is shared among the nodes of a computer network. 
+                    As a database, a blockchain stores information electronically in digital format. 
+                    Blockchains are best known for their crucial role in cryptocurrency systems, such as Bitcoin, for maintaining a secure and decentralized record of transactions. 
+                    The innovation with a blockchain is that it guarantees the fidelity and security of a record of data and generates trust without the need for a trusted third party.`,
+                    date: "02/01/01",
+                    change_type: "Edit"
+                    //text taken from https://www.investopedia.com/terms/b/blockchain.asp
+            }
+        ]
+    }]
 };
 
 export default Home;
