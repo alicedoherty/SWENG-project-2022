@@ -255,4 +255,18 @@ Home.defaultProps = {
     }]
 };
 
+<<<<<<< HEAD
 export default Home;
+=======
+);
+}
+Home.propTypes = {
+    postData: PropTypes.arrayOf(PropTypes.object).isRequired
+  };
+  
+Home.defaultProps = {
+    postData: []
+  };
+
+  export default Home;
+>>>>>>> 88951d6 (Retrieve data from blockchain)
