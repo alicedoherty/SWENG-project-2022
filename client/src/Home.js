@@ -5,25 +5,13 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
 import "./index.css"
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 
 function Home(props) {
-
-let {
+    let {
         postData
-      } = props;
-
-const { id } = useParams();
-const post = postData[id];
-
+    } = props;
 
 //constant strings for testing, will be replaced by appropriate data down the line
 const defaultString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -43,11 +31,18 @@ const changeButtonStyle = { // button styles for buttons under the text box
     }
 }
 
+console.log(postData);
+console.log(postData[0]);
+//var index = parseInt("0");
+//console.log(postData[0].postVersions[1]);
+//const post = postData[index].postVersions[index];
+//console.log(post.postVersions[index]);
+
 // //hook to change the text inside box
 //const [currentTitle, setTitle] = useState("Post")
 //const [currentText, setText] = useState(defaultString)
-const [currentTitle, setTitle] = useState(postData[0].postVersions[0].post_title)
-const [currentText, setText] = useState(postData[0].postVersions[0].post_text)
+//const [currentTitle, setTitle] = useState(postData[0].postVersions[0].post_title)
+//const [currentText, setText] = useState(postData[0].postVersions[0].post_text)
 
 return(
     <div className='Home'>
@@ -92,7 +87,8 @@ return(
                         top: -10,
                         borderBottom:1}}>
                     <Typography variant = "h4">
-                        {currentTitle}
+                        {/* {currentTitle} */}
+                        {/* {postData[0].postVersions[0].post_title} */}
                     </Typography>
                     </Box>
 
@@ -103,7 +99,8 @@ return(
                         bgcolor:"#ecf3ff",}}>
 
                     <Typography variant = "body1">
-                        {currentText}
+                        {/* {currentText} */}
+                        {/* {postData[0].postVersions[0].post_text} */}
                     </Typography>
                     </Box>
                 </Box>
@@ -130,7 +127,8 @@ return(
                         top: -10,
                         borderBottom:1}}>
                     <Typography variant = "h4">
-                        {currentTitle}
+                        {/* {currentTitle} */}
+                        {/* {postData[0].postVersions[0].post_title} */}
                     </Typography>
                     </Box>
 
@@ -141,7 +139,8 @@ return(
                         bgcolor:"#ecf3ff",}}>
 
                     <Typography variant = "body1">
-                        {currentText}
+                        {/* {currentText} */}
+                        {/* {postData[0].postVersions[0].post_text} */}
                     </Typography>
                     </Box>
                 </Box>
@@ -222,17 +221,16 @@ return(
         </Box>
         
         </Container>
-        </div>
-        
-
-);
+        </div>  
+    );
 }
+
 Home.propTypes = {
     postData: PropTypes.arrayOf(PropTypes.object).isRequired
-  };
+};
   
 Home.defaultProps = {
     postData: []
-  };
+};
 
-  export default Home;
+export default Home;
