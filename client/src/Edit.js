@@ -13,9 +13,13 @@ import Typography from '@mui/material/Typography'
 import { Link } from 'react-router-dom';
 
 
-// title saying editing
-// display text of the latest post you just clicked.
-//be able to edit the content
+// title saying editing: x
+// display text of the latest post you just clicked: x
+//be able to edit the content: x
+
+
+// bug
+// need to chnage something in all of the fields
 
 // :() emoticon 
 class Edit extends Component {
