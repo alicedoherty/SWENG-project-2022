@@ -161,27 +161,27 @@ function Post(props) {
                 <Container sx={{padding:"10px"}}>
 
                     
-                <Box sx={{position: "absolute", top:"95%", bgcolor: '#ecf3ff', border: 1, borderColor:"#1c3664", width:"60%", padding:"30px",borderRadius: '4px'}}>
-                        <Typography variant="h4" sx={{ color: "#1c3664" }}>
-                            Previous Versions
+                <Box sx={{position: "absolute", top:"95%", bgcolor: '#f7faff', border: 1, borderColor:"#1c3664", width:"60%", padding:"30px",borderRadius: '4px'}}>
+                        <Typography variant="h4" sx={{ color: "#1c3664", mb:"2%"}}>
+                            Audit Log
                         </Typography>
-                        <Box sx={{bgcolor:"#f7faff", borderColor:"#1c3664", border:1}}>
+                        <Box sx={{bgcolor:"#ecf3ff", borderColor:"#1c3664", border:1}}>
                             <Stack direction="row">
-                                <Typography variant="h5" sx={{fontsize:14, position:"relative", left:"2%"}}>
+                                <Typography variant="h6" sx={{fontsize:12, position:"relative", left:"2%"}}>
                                     Version No.
                                 </Typography>
-                                <Typography variant="h5" sx={{fontsize:14, position:"absolute", left:"20%"}}>
+                                <Typography variant="h6" sx={{fontsize:12, position:"absolute", left:"20%"}}>
                                     Date
                                 </Typography>
-                                <Typography variant="h5" sx={{fontsize:14, position:"absolute", left:"37%"}}>
+                                <Typography variant="h6" sx={{fontsize:12, position:"absolute", left:"37%"}}>
                                     Author
                                 </Typography>
-                                <Typography variant="h5" sx={{fontsize:14, position:"absolute", left:"59%"}}>
+                                <Typography variant="h6" sx={{fontsize:12, position:"absolute", left:"59%"}}>
                                     Title
                                 </Typography>
                             </Stack>
                         </Box>
-                        <Box sx={{bgcolor:"#f7faff", borderColor:"black", border:1, height: "25vh", overflow:"auto"}}>
+                        <Box sx={{bgcolor:"#ecf3ff", borderColour:"#f7faff", border:1, height: "25vh", overflow:"auto"}}>
                             <List sx={{maxHeight:"100%", padding:"15px"}}>
                                 {post.postVersions.map(post => <AuditCard post={post}/>)}
                             </List>
