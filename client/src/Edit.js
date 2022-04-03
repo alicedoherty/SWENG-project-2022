@@ -95,14 +95,15 @@ class Edit extends Component {
                 }}
                 />
               
-              <TextField
-                id="post-author"
-                label="Author"
-                variant="standard"
-                onChange={(e) => {
-                  // Reads in author
-                  this.state.author = e.target.value
-                }}
+                <TextField
+                  id="post-author"
+                  label="Author"
+                  variant="standard"
+                  defaultValue={latestPost.author}
+                  onChange={(e) => {
+                    // Reads in author
+                    this.state.author = e.target.value
+                  }}
               />
               <Box sx={{ //outer box containing the text box
                 borderRadius: '2px',
@@ -130,14 +131,15 @@ class Edit extends Component {
                 </Box>
               </Box>
 
-              <TextField multiline rows={15} sx={{ marginTop: 2 }}
-                id="post-content"
-                label="Content"
-                fullWidth
-                onChange={(e) => {
-                  // Reads in text content
-                  this.state.content = e.target.value
-                }}
+                <TextField multiline rows={15} sx={{ marginTop: 2 }}
+                  id="post-content"
+                  label="Content"
+                  fullWidth
+                  defaultValue={latestPost.post_text}
+                  onChange={(e) => {
+                    // Reads in text content
+                    this.state.content = e.target.value
+                  }}
               />
               <Stack
                 position="relative"
