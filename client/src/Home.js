@@ -11,14 +11,23 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import "./index.css"
+import PropTypes from 'prop-types';
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+
+function Home(props) {
+
+let {
+        postData
+      } = props;
+
+const { id } = useParams();
+const post = postData[id];
 
 
-export default function Create (){
-
-
-// constant strings for testing, will be replaced by appropriate data down the line
+//constant strings for testing, will be replaced by appropriate data down the line
 const defaultString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-// const testingString = "According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway. Because bees don’t care what humans think is impossible."
+//const testingString = "According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway. Because bees don’t care what humans think is impossible."
 const shorterString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolo";
 
 const changeButtonStyle = { // button styles for buttons under the text box
@@ -35,8 +44,10 @@ const changeButtonStyle = { // button styles for buttons under the text box
 }
 
 // //hook to change the text inside box
-const [currentTitle, setTitle] = useState("Post")
-const [currentText, setText] = useState(defaultString)
+//const [currentTitle, setTitle] = useState("Post")
+//const [currentText, setText] = useState(defaultString)
+const [currentTitle, setTitle] = useState(postData[0].postVersions[0].post_title)
+const [currentText, setText] = useState(postData[0].postVersions[0].post_text)
 
 return(
     <div className='Home'>
@@ -148,53 +159,7 @@ return(
         </Box>
 
         {/* User card */}
-        <Card sx={{ maxWidth: 345,
-            bgcolor:"#f7faff",
-            borderRadius: '2px',
-            boxShadow:1,
-            border: 1, 
-            borderColor: "#1c3664",
-            position: 'absolute',
-            top: "10%",
-            left: "65%",
-            width:"30%", height:"40%",}}>
-            
-            <CardActionArea>
-                <CardMedia align="center">
-                    <Avatar sx={{ 
-                        bgcolor: "#f37026", 
-                        width: 56, 
-                        height: 56,
-                        mt:"7%"}}>
-                            G
-                    </Avatar>
-                </CardMedia>
-                <CardContent align="center">
-                    <Typography gutterBottom variant="h5" component="div">
-                        Welcome Greg
-                    </Typography>
-                <Typography color="text.secondary">
-                    Username: asdf123
-                </Typography>
-                <Typography color="text.secondary">
-                    Joined: 1st January 2022
-                </Typography>
-                <Typography color="text.secondary">
-                    Posts: 4
-                </Typography>
-                </CardContent>
-            </CardActionArea>
-            <Stack
-                    position="relative"
-                    mt="1%"
-                    mb="3%"
-                    direction="row"
-                    justifyContent="center">
-                <Button size="small"sx={changeButtonStyle}>
-                    Edit Profile
-                </Button>
-            </Stack>
-        </Card>
+
         
         {/* Recently viewed box */}
         <Box sx={{ //outer box for the recently viewed section
@@ -204,7 +169,7 @@ return(
             borderColor: "#1c3664",
             position: 'absolute',
             left:"60%",
-            top: "55%",
+            top: "10%",
             width:"35%", height:"42%",
             bgcolor: '#f7faff'}} >
             
@@ -228,7 +193,7 @@ return(
                     top: -10,
                     borderBottom:1}}>
                 <Typography variant = "h4">
-                    {"Recently Viewed"}
+                    {"Featured Post"}
                 </Typography>
                 </Box>
 
@@ -262,3 +227,12 @@ return(
 
 );
 }
+Home.propTypes = {
+    postData: PropTypes.arrayOf(PropTypes.object).isRequired
+  };
+  
+Home.defaultProps = {
+    postData: []
+  };
+
+  export default Home;
