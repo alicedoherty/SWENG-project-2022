@@ -68,6 +68,10 @@ class Edit extends Component {
     const post = this.props.postData[this.state.id];
     const latestPost = post.postVersions[post.postVersions.length - 1];
 
+    this.state.title=latestPost.post_title;   //initialise this.variable to match what will be in the field, if user changes values in the field then these variables will be updated
+    this.state.author=latestPost.author;      
+    this.state.content=latestPost.post_text;   
+                        
     return (
       <div className="Edit">
         <Container maxWidth="xs">
