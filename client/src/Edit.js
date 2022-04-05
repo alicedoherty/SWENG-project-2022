@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { Link } from 'react-router-dom';
 
 
 
@@ -33,8 +32,6 @@ class Edit extends Component {
   };
 
 
-  componentDidMount() {
-    // Sets state id to the id of the post being edited
   constructor(props) {
     super(props);
 
