@@ -107,7 +107,8 @@ class Edit extends Component {
                     redid = this.state.id;
                     this.createUserAndPost(this.state.id, this.state.author, this.state.content, this.state.title);
                   }}>
-                  <Link to={`/posts/${redid}`} style = {{color: '#f37026', textDecoration: 'none'}}>Edit Post</Link>
+                  <Link to={"/"} style = {{color: '#f37026', textDecoration: 'none'}}>Post</Link>
+                  {/*<Link to={`/posts/${redid}`} style = {{color: '#f37026', textDecoration: 'none'}}>Edit Post</Link>*/}
                 </Button>
               </Stack>
             </Container>

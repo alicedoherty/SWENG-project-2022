@@ -95,7 +95,7 @@ class Create extends Component {
                     e.preventDefault();
                     this.createUserAndPost(this.state.author, this.state.content, this.state.title);
                   }}>
-                  <Link to={"/home"} style = {{color: '#f37026', textDecoration: 'none'}}>Post</Link>
+                  <Link to={"/"} style = {{color: '#f37026', textDecoration: 'none'}}>Post</Link>
                 </Button>
               </Stack>
             </Container>
