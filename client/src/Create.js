@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
 
 
 class Create extends Component {
@@ -94,7 +95,7 @@ class Create extends Component {
                     e.preventDefault();
                     this.createUserAndPost(this.state.author, this.state.content, this.state.title);
                   }}>
-                  Post
+                  <Link to={"/home"} style = {{color: '#f37026', textDecoration: 'none'}}>Post</Link>
                 </Button>
               </Stack>
             </Container>

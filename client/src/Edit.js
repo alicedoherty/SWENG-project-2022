@@ -8,6 +8,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
 
 
 class Edit extends Component {
@@ -17,6 +18,7 @@ class Edit extends Component {
     author: null,
     content: null,
   };
+
 
   componentDidMount() {
     // Sets state id to the id of the post being edited
@@ -35,6 +37,7 @@ class Edit extends Component {
   }
 
   render() {
+    var redid = 0;
     if (!this.props.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
@@ -98,12 +101,13 @@ class Edit extends Component {
                 mb="3%"
                 direction="row"
                 justifyContent="center">
-                <Button variant="contained" sx={changeButtonStyle}
+                <Button variant="contained" sx={changeButtonStyle} 
                   onClick={(e) => {
                     e.preventDefault();
+                    redid = this.state.id;
                     this.createUserAndPost(this.state.id, this.state.author, this.state.content, this.state.title);
                   }}>
-                  Edit Post
+                  <Link to={`/posts/${redid}`} style = {{color: '#f37026', textDecoration: 'none'}}>Edit Post</Link>
                 </Button>
               </Stack>
             </Container>
