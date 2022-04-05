@@ -8,9 +8,10 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { Link } from 'react-router-dom';
+
 
 
 // title saying editing: x
@@ -30,8 +31,10 @@ class Edit extends Component {
     content: null,
   };
 
+
   constructor(props) {
     super(props);
+
     const { id } = this.props.params;
     this.state.id = id;
   }
@@ -47,6 +50,7 @@ class Edit extends Component {
   }
 
   render() {
+    var redid = 0;
     if (!this.props.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
@@ -155,12 +159,14 @@ class Edit extends Component {
                 mb="3%"
                 direction="row"
                 justifyContent="center">
-                <Button variant="contained" sx={changeButtonStyle}
+                <Button variant="contained" sx={changeButtonStyle} 
                   onClick={(e) => {
                     e.preventDefault();
+                    redid = this.state.id;
                     this.createUserAndPost(this.state.id, this.state.author, this.state.content, this.state.title);
                   }}>
-                  Edit Post
+                  <Link to={"/"} style = {{color: '#f37026', textDecoration: 'none'}}>Post</Link>
+                  {/*<Link to={`/posts/${redid}`} style = {{color: '#f37026', textDecoration: 'none'}}>Edit Post</Link>*/}
                 </Button>
               </Stack>
             </Container>
