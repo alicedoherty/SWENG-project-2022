@@ -160,7 +160,7 @@ class Edit extends Component {
                     e.preventDefault();
                     this.createUserAndPost(this.state.id, this.state.author, this.state.content, this.state.title);
                   }}>
-                  Post
+                  Edit Post
                 </Button>
               </Stack>
             </Container>
