@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component, setState } from 'react'
 import { useParams } from 'react-router';
 
 import Container from '@mui/material/Container'
@@ -11,18 +11,16 @@ import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
 
-// title saying editing: x
-// display text of the latest post you just clicked: x
-//be able to edit the content: x
-
-
-// bug
-// need to chnage something in all of the fields
-
-// :() emoticon 
 class Edit extends Component {
   state = {
     id: null,
@@ -50,7 +48,7 @@ class Edit extends Component {
   }
 
   render() {
-    var redid = 0;
+    //var redid = 0;
     if (!this.props.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
@@ -72,14 +70,15 @@ class Edit extends Component {
     const post = this.props.postData[this.state.id];
     const latestPost = post.postVersions[post.postVersions.length - 1];
 
-    this.state.title=latestPost.post_title;   //initialise this.variable to match what will be in the field, if user changes values in the field then these variables will be updated
-    this.state.author=latestPost.author;      
-    this.state.content=latestPost.post_text;   
+    this.state.title = latestPost.post_title;   //initialise this.variable to match what will be in the field, if user changes values in the field then these variables will be updated
+    this.state.author = latestPost.author;      
+    this.state.content = latestPost.post_text;
                         
     return (
       <div className="Edit">
         <Container maxWidth="xs">
           <Header />
+
           <Paper elevation={1} square sx={{
             width: 600,
             marginTop: 10,
@@ -88,7 +87,8 @@ class Edit extends Component {
             left: "30%",
             top: "5%"
           }}>
-            <Container disableGutters sx={{ padding: 2 }}>
+
+            <Container disableGutters sx={{ padding: 2, top: "30%"}}>
               <TextField
                 id="post-title"
                 label="Title"
@@ -97,13 +97,6 @@ class Edit extends Component {
                 onChange={(e) => {
                   // Reads in title
                   this.state.title = e.target.value;
-                  
-                  // this.state.title = latestPost.post_title;
-                  // if (e.target.value ==  null) {
-                  //   this.state.title = latestPost.post_title
-                  // } else {
-                  //   this.state.title = e.target.value
-                  // }
                 }}
                 />
               
@@ -125,7 +118,7 @@ class Edit extends Component {
                 position: 'absolute',
                 left: "-44%",
                 top: "0%",
-                width:"35%", height:"10%",
+                width:"27%", height:"10%",
                 bgcolor: '#f7faff'}} >
 
                 
@@ -138,7 +131,7 @@ class Edit extends Component {
                }}>
                 
                   <Typography variant = "h4">
-                    {'Editing Post:'}
+                    {'Edit Post'}
                   </Typography>
                 </Box>
               </Box>
@@ -162,11 +155,19 @@ class Edit extends Component {
                 <Button variant="contained" sx={changeButtonStyle} 
                   onClick={(e) => {
                     e.preventDefault();
-                    redid = this.state.id;
-                    this.createUserAndPost(this.state.id, this.state.author, this.state.content, this.state.title);
+                    //redirectId = this.state.id;
+                    if(this.state.author == latestPost.author 
+                      && this.state.content == latestPost.post_text 
+                      && this.state.title == latestPost.post_title) {      //prevent user from being charged for edit without actually making any changes
+                      //do nothing
+                        console.log("no change");
+                    }
+                    else{
+                      this.createUserAndPost(this.state.id, this.state.author, this.state.content, this.state.title);
+                    }
                   }}>
-                  <Link to={"/"} style = {{color: '#f37026', textDecoration: 'none'}}>Post</Link>
-                  {/*<Link to={`/posts/${redid}`} style = {{color: '#f37026', textDecoration: 'none'}}>Edit Post</Link>*/}
+                  <Link to={"/"} style = {{color: '#f37026', textDecoration: 'none'}}>Edit Post</Link>
+                  {/* <Link to={`/posts/${this.state.id}`} style = {{color: '#f37026', textDecoration: 'none'}}>Edit Post</Link> */}
                 </Button>
               </Stack>
             </Container>
