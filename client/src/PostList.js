@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
 import PostCard from './PostCard.js';
 import PropTypes from 'prop-types';
 import Container from '@mui/material/Container';
@@ -14,7 +14,6 @@ class PostList extends React.Component {
               post={post} />
           ))
         }
-        {/* </Row> */}
       </Container>
     );
   }

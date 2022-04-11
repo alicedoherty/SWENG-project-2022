@@ -40,8 +40,8 @@ function Post(props) {
     const [currentText, setText] = useState(post.postVersions[post.postVersions.length - 1].post_text)
     const [currentAuthor, setAuthor] = useState(post.postVersions[post.postVersions.length - 1].author)
 
-    const arrayLength =  post.postVersions.length;
-    
+    const arrayLength = post.postVersions.length;
+
     return (
         <div className='Post'>
             <Container maxWidth="xs">
@@ -67,13 +67,12 @@ function Post(props) {
 
                     <Container>
                         <Stack spacing={4}>
-                        {
-                        post.postVersions.slice(0).reverse().map(post => 
-                            <Button variant = "outlined" sx={{color: "#f37026",changeButtonStyle}} onClick={() => [setText(post.post_text), setAuthor(post.author), setTitle(post.post_title)]} >
-                                {post.post_version_id==(arrayLength-1) ? "Current Version - " + post.date :  "Version " + (post.post_version_id+1) +" - " + post.date}       {/*+1 so versions start from 1, better readability for user */ }
-                            </Button>)
-                        }
-
+                            {
+                                post.postVersions.slice(0).reverse().map(post =>
+                                    <Button variant="outlined" sx={{ color: "#f37026", changeButtonStyle }} onClick={() => [setText(post.post_text), setAuthor(post.author), setTitle(post.post_title)]} >
+                                        {post.post_version_id == (arrayLength - 1) ? "Current Version - " + post.date : "Version " + (post.post_version_id + 1) + " - " + post.date}       {/*+1 so versions start from 1, better readability for user */}
+                                    </Button>)
+                            }
                         </Stack>
                     </Container>
                 </Box>
@@ -90,7 +89,6 @@ function Post(props) {
                     bgcolor: '#f7faff'
                 }} >
 
-
                     <Box m="auto" sx={{ //inner box where the text box goes
                         padding: 2.5,
                         borderRadius: '2px',
@@ -104,14 +102,11 @@ function Post(props) {
                         bgcolor: '#ecf3ff'
                     }}>
 
-
                         <Box sx={{ //box for the title
                             position: "relative",
                             width: "100%", height: "10%",
                             borderBottom: 1
                         }}>
-
-
                             <Stack // stack for aligning title, author and user icon 
                                 direction="row"
                                 justifyContent="space-between"
@@ -135,7 +130,6 @@ function Post(props) {
                             top: "2%",
                             width: "100%", height: "80%",
                         }}>
-
                             <Typography variant="body1" sx={{ color: "#1c3664" }}>
                                 {currentText}
                             </Typography>
@@ -153,50 +147,48 @@ function Post(props) {
                         spacing={4}>
                         <Button sx={changeButtonStyle} size="small">
                             {/* Links to edit page for that particular post (id is the id of the post) */}
-                            <Link to={`/edit/${id}`} style = {{color: '#f37026', textDecoration: 'none'}}>Edit Post</Link>                        </Button>
+                            <Link to={`/edit/${id}`} style={{ color: '#f37026', textDecoration: 'none' }}>Edit Post</Link>
+                        </Button>
 
                     </Stack>
 
                 </Box>
-                <Container sx={{padding:"10px"}}>
 
-                    
-                <Box sx={{position: "absolute", top:"95%", bgcolor: '#f7faff', border: 1, borderColor:"#1c3664", width:"60%", padding:"30px",borderRadius: '4px'}}>
-                        <Typography variant="h4" sx={{ color: "#1c3664", mb:"2%"}}>
+                <Container sx={{ padding: "10px" }}>
+
+                    <Box sx={{ position: "absolute", top: "95%", bgcolor: '#f7faff', border: 1, borderColor: "#1c3664", width: "60%", padding: "30px", borderRadius: '4px' }}>
+                        <Typography variant="h4" sx={{ color: "#1c3664", mb: "2%" }}>
                             Audit Log
                         </Typography>
-                        <Box sx={{bgcolor:"#ecf3ff", borderColor:"#1c3664", border:1}}>
+
+                        <Box sx={{ bgcolor: "#ecf3ff", borderColor: "#1c3664", border: 1 }}>
                             <Stack direction="row">
-                                <Typography variant="h6" sx={{fontsize:12, position:"relative", left:"2%"}}>
+                                <Typography variant="h6" sx={{ fontsize: 12, position: "relative", left: "2%" }}>
                                     Version No.
                                 </Typography>
-                                <Typography variant="h6" sx={{fontsize:12, position:"absolute", left:"20%"}}>
+                                <Typography variant="h6" sx={{ fontsize: 12, position: "absolute", left: "20%" }}>
                                     Date
                                 </Typography>
-                                <Typography variant="h6" sx={{fontsize:12, position:"absolute", left:"37%"}}>
+                                <Typography variant="h6" sx={{ fontsize: 12, position: "absolute", left: "37%" }}>
                                     Author
                                 </Typography>
-                                <Typography variant="h6" sx={{fontsize:12, position:"absolute", left:"59%"}}>
+                                <Typography variant="h6" sx={{ fontsize: 12, position: "absolute", left: "59%" }}>
                                     Title
                                 </Typography>
                             </Stack>
                         </Box>
-                        <Box sx={{bgcolor:"#ecf3ff", borderColour:"#f7faff", border:1, height: "25vh", overflow:"auto"}}>
-                            <List sx={{maxHeight:"100%", padding:"15px"}}>
-                                {post.postVersions.map(post => <AuditCard post={post}/>)}
+
+                        <Box sx={{ bgcolor: "#ecf3ff", borderColour: "#f7faff", border: 1, height: "25vh", overflow: "auto" }}>
+                            <List sx={{ maxHeight: "100%", padding: "15px" }}>
+                                {post.postVersions.map(post => <AuditCard post={post} />)}
                             </List>
                         </Box>
-                        
-                    </Box>                      
-        
+
+                    </Box>
+
                 </Container>
-                
+
             </Container>
-
-            
-
-        
-        
         </div>
 
     );

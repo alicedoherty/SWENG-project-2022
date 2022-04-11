@@ -54,7 +54,7 @@ class Edit extends Component {
     }
 
     // Button styles for buttons under the text box 
-    const changeButtonStyle = { 
+    const changeButtonStyle = {
       position: "relative",
       fontSize: 18,
       border: 1,

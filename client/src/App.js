@@ -111,7 +111,7 @@ class App extends Component {
     return (
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<Home postData={undefined} />} />
           <Route exact path="/create" element={<Create web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} />} />
           <Route exact path="/posts/:id" element={<Post postData={this.state.postData} />} />
           <Route exact path="/edit/:id" element={<Edit web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} postData={this.state.postData} />} />

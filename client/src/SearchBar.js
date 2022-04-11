@@ -15,7 +15,6 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
             />
         </FormControl>
     );
-
 };
 
 export default SearchBar;
