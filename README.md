@@ -52,7 +52,7 @@ compile
 migrate
 ```
 
-- Note: you can also run `migrate --reset` but this will reset all the data stored in the smart contract (basically clears the "database")
+- **Note:** you can also run `migrate --reset` but this will reset all the data stored in the smart contract (basically clears the "database")
 
 6. To run React app
 
@@ -89,3 +89,22 @@ These steps are optional but will make your life easier if you are using the app
 ## Notes
 - Boilerplate template used: https://github.com/truffle-box/react-box
 - If the React app only displays: "Loading Web3, accounts, and contract..." this most likely means that the account being used in MetaMask is not correctly connected to your local Ganache network
+
+## UI Screenshots
+### Home Page
+![Homepage](/images/home-page.png)
+
+### Create Post Page
+![Create Post Page](/images/create-post.png)
+
+### Search Page
+![Search Page](/images/search-page.png)
+
+### View Post Page
+![View Post Page](/images/view-post.png)
+
+### Audit Log
+![Audit Log](/images/audit-log.png)
+
+### Edit Post Page
+![Edit Post Page](/images/edit-post.png)

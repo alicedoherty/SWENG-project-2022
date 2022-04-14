@@ -252,7 +252,7 @@ Home.defaultProps = {
             {
                 post_version_id : 0,
                 author: "Jake Frankenfield",
-                post_title:"What is BitCoin?",
+                post_title:"What is Bitcoin?",
                 post_text: `Bitcoin is a decentralized digital currency created in January 2009.
                 It follows the ideas set out in a white paper by the mysterious and pseudonymous Satoshi Nakamoto. `,
                 date: "17/01/22",
